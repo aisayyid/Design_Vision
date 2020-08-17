@@ -1,6 +1,7 @@
 
 
 import React from 'react';
+import "./search.css"
 // import { Header } from 'semantic-ui-react';
 // import RegisterForm from "../../components/RegisterForm";
 // import { Link } from "react-router-dom";
@@ -8,7 +9,6 @@ import React from 'react';
 // import { registerUser } from "../../actions/authActions";
 
 const Search = () => {
-
 
     return (
 
