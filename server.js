@@ -6,6 +6,7 @@ const config = require("./config");
 const routes = require("./routes");
 
 
+
 const app = express();
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 async function quickstart() {
@@ -19,11 +20,13 @@ async function quickstart() {
     
   
     // Performs label detection on the image file
-    const [result] = await client.labelDetection('./resources/wakeupcat.jpg');
+    const [result] = await client.labelDetection("./client/src/images/abstract-background-4756987_1920.jpg");
     const labels = result.labelAnnotations;
     console.log('Labels:');
     labels.forEach(label => console.log(label.description));
   }
+
+  quickstart();
   //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 
 // middleware to parse data
