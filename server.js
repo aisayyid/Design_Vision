@@ -5,6 +5,7 @@ require("dotenv").config();
 const config = require("./config");
 const routes = require("./routes");
 
+
 const app = express();
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 async function quickstart() {
@@ -12,7 +13,10 @@ async function quickstart() {
     const vision = require('@google-cloud/vision');
   
     // Creates a client
-    const client = new vision.ImageAnnotatorClient();
+    const client = new vision.ImageAnnotatorClient({
+        keyFilename: "./apiAuthorization.json"
+    });
+    
   
     // Performs label detection on the image file
     const [result] = await client.labelDetection('./resources/wakeupcat.jpg');
