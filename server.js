@@ -6,6 +6,8 @@ const config = require("./config");
 const routes = require("./routes");
 var bodyParser = require('body-parser');
 var multer = require ("multer");
+const Images = require("./models/images");
+
 
 // const routes = require("./routes")
 // const cors = require("./client/src/cors")
@@ -30,12 +32,15 @@ async function quickstart(uploadedFile) {
     
     const [result] = await client.labelDetection("./client/public/uploads/" + uploadFilename);
     const labels = result.labelAnnotations;
+    const labelArray = [];
     console.log('Labels:');
-    labels.forEach(label => console.log(label.description));
+    labels.forEach(label => labelArray.push(label.description));
+    //goes to google returns array
+    return labelArray;
   }
 
  
-  //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
+//////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 
 // middleware to parse data
 app.use(express.urlencoded({ extended: true }))
@@ -64,19 +69,25 @@ const storage = multer.diskStorage({
     })
     
     
-    app.post('/uploadFile', upload.single('myImage'), (req, res, next) => {
+    app.post('/uploadFile', upload.single('myImage'), async (req, res, next) => {
         const file = req.file;
         if(!file){
             const error = new Error ("please upload");
             error.httpStatusCode = 400;
             return next(error);
         }
-        res.send (file);
-        var uploadedFile = file
-        quickstart(uploadedFile);
+        // res.send (file);
+        var uploadedFile = file;
+        //await because quickstart takes time waits for return
+        const labelsFinal = await quickstart(uploadedFile);
+
+        //model
+        const newImage = new Images({
+            imageName: uploadedFile.filename,
+            labels: labelsFinal
+        })
+        newImage.save().then(image => res.json(image)).catch(err => console.log(err))
     })
-
-
 
 // serve up static assets
 if (process.env.NODE_ENV === "production") {
