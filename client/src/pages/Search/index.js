@@ -13,7 +13,7 @@ const Search = () => {
 
     return (
 
-<form action="/uploadFile" method="POST" enctype="multipart/form-data">
+<form action="/uploadFile" method="POST" encType="multipart/form-data">
   Select image to upload:
   <input type="file" name="myImage" accept= "image/*"/>
   <input type="submit" value="Upload Image" name="submit"/>

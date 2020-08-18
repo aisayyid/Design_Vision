@@ -13,6 +13,7 @@ var multer = require ("multer");
 
 
 const app = express();
+
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 async function quickstart() {
     // Imports the Google Cloud client library
@@ -42,6 +43,30 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 // app.use(express.static(path.join(__dirname, "../DesignersFriends_Database/")))
+const storage = multer.diskStorage({
+    destination: function (req, file, cb){
+   cb(null, "uploads")
+    },
+    filename: function(req, file, cb){
+        cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
+    }
+    })   
+    const upload = multer ({storage: storage})
+    
+    app.get("/search", (req, res)=>{
+        res.sendFile(__dirname + "../client/src/pages/Search/index.js")
+    })
+    
+    
+    app.post('/uploadFile', upload.single('myImage'), (req, res, next) => {
+        const file = req.file;
+        if(!file){
+            const error = new Error ("please upload");
+            error.httpStatusCode = 400;
+            return next(error);
+        }
+        res.send (file);
+    })
 
 // serve up static assets
 if (process.env.NODE_ENV === "production") {
