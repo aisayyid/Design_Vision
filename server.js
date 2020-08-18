@@ -15,7 +15,7 @@ var multer = require ("multer");
 const app = express();
 
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
-async function quickstart() {
+async function quickstart(uploadedFile) {
     // Imports the Google Cloud client library
     const vision = require('@google-cloud/vision');
   
@@ -26,13 +26,14 @@ async function quickstart() {
     
   
     // Performs label detection on the image file
-    const [result] = await client.labelDetection("./client/src/images/abstract-background-4756987_1920.jpg");
+    
+    const [result] = await client.labelDetection("./client/public/uploads/" + uploadedFile);
     const labels = result.labelAnnotations;
     console.log('Labels:');
     labels.forEach(label => console.log(label.description));
   }
 
-  quickstart();
+ 
   //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 
 // middleware to parse data
@@ -43,6 +44,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 // app.use(express.static(path.join(__dirname, "../DesignersFriends_Database/")))
+
 const storage = multer.diskStorage({
    
     destination: function (req, file, cb){
@@ -63,14 +65,17 @@ const storage = multer.diskStorage({
     
     app.post('/uploadFile', upload.single('myImage'), (req, res, next) => {
         const file = req.file;
-        console.log("Here is the file" + file)
         if(!file){
             const error = new Error ("please upload");
             error.httpStatusCode = 400;
             return next(error);
         }
         res.send (file);
+        var uploadedFile = file.filename
+        quickstart( uploadedFile);
     })
+
+
 
 // serve up static assets
 if (process.env.NODE_ENV === "production") {
