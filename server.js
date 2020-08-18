@@ -44,22 +44,26 @@ app.use(bodyParser.json())
 
 // app.use(express.static(path.join(__dirname, "../DesignersFriends_Database/")))
 const storage = multer.diskStorage({
+   
     destination: function (req, file, cb){
-   cb(null, "uploads")
+       
+   cb(null,__dirname + "/client/public/uploads/")
     },
     filename: function(req, file, cb){
         cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
     }
     })   
     const upload = multer ({storage: storage})
+
     
     app.get("/search", (req, res)=>{
-        res.sendFile(__dirname + "../client/src/pages/Search/index.js")
+        res.sendFile(__dirname + "/client/src/pages/Search/index.js")
     })
     
     
     app.post('/uploadFile', upload.single('myImage'), (req, res, next) => {
         const file = req.file;
+        console.log("Here is the file" + file)
         if(!file){
             const error = new Error ("please upload");
             error.httpStatusCode = 400;
