@@ -4,6 +4,11 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const config = require("./config");
 const routes = require("./routes");
+var bodyParser = require('body-parser');
+var multer = require ("multer");
+
+// const routes = require("./routes")
+// const cors = require("./client/src/cors")
 
 
 
@@ -33,18 +38,27 @@ async function quickstart() {
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+
+// app.use(express.static(path.join(__dirname, "../DesignersFriends_Database/")))
+
 // serve up static assets
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "./client/build")))
 };
 
 // connect to Mongo DB 
+// mongoose.Promise = global.Promise
 mongoose.connect(config.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: true })
     .then(() => console.log(`Mongo DB Succesfully Connected`))
     .catch(err => console.log(err));
+// mongoose.set("useFindAndModify", false)
 
 // use routes
 app.use(routes);
+
+// cors(app)
 
 // check for "production" enviroment and set port
 const PORT = process.env.PORT || 3001;
