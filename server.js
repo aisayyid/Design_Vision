@@ -16,6 +16,7 @@ const app = express();
 
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 async function quickstart(uploadedFile) {
+    const uploadFilename = uploadedFile.filename;
     // Imports the Google Cloud client library
     const vision = require('@google-cloud/vision');
   
@@ -27,7 +28,7 @@ async function quickstart(uploadedFile) {
   
     // Performs label detection on the image file
     
-    const [result] = await client.labelDetection("./client/public/uploads/" + uploadedFile);
+    const [result] = await client.labelDetection("./client/public/uploads/" + uploadFilename);
     const labels = result.labelAnnotations;
     console.log('Labels:');
     labels.forEach(label => console.log(label.description));
@@ -71,8 +72,8 @@ const storage = multer.diskStorage({
             return next(error);
         }
         res.send (file);
-        var uploadedFile = file.filename
-        quickstart( uploadedFile);
+        var uploadedFile = file
+        quickstart(uploadedFile);
     })
 
 
