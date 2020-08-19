@@ -3,15 +3,7 @@ const Schema = mongoose.Schema;
   
 var ImageSchema = new Schema({ 
 
-// imageName: {
-//     type: String,
-//     default: "none",
-//     required: true
-// },
-// imageData: {
-//     type: JSON,
-//     required: true
-// },
+
 imageName: {
     type: String,
     required: true

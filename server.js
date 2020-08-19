@@ -7,7 +7,7 @@ const routes = require("./routes");
 var bodyParser = require('body-parser');
 var multer = require ("multer");
 const Images = require("./models/images");
-
+const fs = require ('fs')
 
 // const routes = require("./routes")
 // const cors = require("./client/src/cors")
@@ -88,6 +88,7 @@ const storage = multer.diskStorage({
         })
         newImage.save().then(image => res.json(image)).catch(err => console.log(err))
     })
+   
 
 // serve up static assets
 if (process.env.NODE_ENV === "production") {
