@@ -9,6 +9,7 @@ var multer = require ("multer");
 const Images = require("./models/images");
 const fs = require ('fs')
 
+
 // const routes = require("./routes")
 // const cors = require("./client/src/cors")
 //Here you go Sarah, delete this comment later.
@@ -86,7 +87,21 @@ const storage = multer.diskStorage({
             imageName: uploadedFile.filename,
             labels: labelsFinal
         })
-        newImage.save().then(image => res.json(image)).catch(err => console.log(err))
+        newImage.save().then(image => { res.json(image)
+        console.log(labelsFinal[0])
+     Images.find({labels: {$in: labelsFinal}})
+     .then(data =>{
+         console.log(data)
+     })
+         
+                
+          
+        
+        
+        
+        
+        }).catch(err => console.log(err))
+      
     })
    
 
