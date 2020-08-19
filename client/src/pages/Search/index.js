@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from "../../components/Card/index"
+// import Card from "../../components/Card/index"
 
 //  function getData (){
 //     let url = "localhost:3000/uploadFile"
@@ -15,6 +15,22 @@ import Card from "../../components/Card/index"
 // }
 
 // action="/uploadFile" method="POST" encType="multipart/form-data"
+// function readURL(input) {
+//   if (input.files && input.files[0]) {
+//     var reader = new FileReader();
+    
+//     reader.onload = function(e) {
+//       $('#blah').attr('src', e.target.result);
+//     }
+    
+//     reader.readAsDataURL(input.files[0]); // convert to base64 string
+//   }
+// }
+
+// $("#imgInp").change(function() {
+//   readURL(this);
+// });
+
 const Search = () => {
 
     return (
@@ -22,17 +38,14 @@ const Search = () => {
 
 <form action="/uploadFile" method="POST" encType="multipart/form-data">
   Select image to upload:
-  <input type="file" name="myImage" accept= "image/*"/>
+  <input type="file" name="myImage"  accept= "image/*" />
     <input type="submit" value="Upload Image" name="submit"/>
 
   {/* <input type="submit" onClick={() => getData()} value="Upload Image" name="submit"/> */}
 </form>
 
-<div>
 
-<Card />
 
-</div>
 </div>
     
 
