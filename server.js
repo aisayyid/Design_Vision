@@ -49,63 +49,74 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 // app.use(express.static(path.join(__dirname, "../DesignersFriends_Database/")))
-
+//setting up multer
 const storage = multer.diskStorage({
-   
+ //telling the destination of where to save the files  
     destination: function (req, file, cb){
        
    cb(null,__dirname + "/client/public/uploads/")
     },
+//setting up file name
     filename: function(req, file, cb){
         cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
     }
     })   
+//sets a const for multer's storage engine
     const upload = multer ({storage: storage})
 
-    
+//we are pulling back the form data from search
     app.get("/search", (req, res)=>{
+//res sendfile grabs from path
         res.sendFile(__dirname + "/client/src/pages/Search/index.js")
     })
     
-    
-    app.post('/uploadFile', upload.single('myImage'), async (req, res, next) => {
+//posting JSON data to a route upload file
+app.post('/uploadFile', upload.single('myImage'), async (req, res, next) => {
         const file = req.file;
+        console.log("heres the file" , file)
+        console.log("req.body" , req.body)
+//if there is not a file there is an error
         if(!file){
             const error = new Error ("please upload");
             error.httpStatusCode = 400;
             return next(error);
         }
-        // res.send (file);
+//sets a variable for uploaded file to the posted file
     var uploadedFile = file;
-        //await because quickstart takes time waits for return
+//await because quickstart takes time waits for return
+//create variable lables final
     const labelsFinal = await quickstart(uploadedFile);
 
-        //model
-    const newImage = new Images({
-            imageName: uploadedFile.filename,
-            labels: labelsFinal
+//set up new image const equal to the model
+const newImage = new Images({
+        imageName: uploadedFile.filename,
+//set labels to the labels final const
+        labels: labelsFinal
         })
-        newImage.save().then(image => { res.json(image)
+//save a new image as JSON
+        newImage.save().then(image => {
     
+//use the collection to find images with labels in common
      Images.find({labels: {$in: labelsFinal}})
      .then(data =>{
-         console.log(data)
+        res.json(data)
      })  
         }).catch(err => console.log(err)) 
     })
 
-    //add a get route to bring back all/one image
+ //add a get route to bring back all/one image
     app.get("/file", (req, res)=>{
         console.log("Server side route hit");
-        //use the Images collection to do a db query to bring back the images
+//use the Images collection to do a db query to bring back all images for testing
         Images.find({})
         .then(data =>{
             console.log(data);
-            //sends the data to the client in an express response.
+//sends the data to the client in an express response.
             res.json(data);
         })  
         .catch(err => console.log(err)) 
     })
+
 
 // serve up static assets
 if (process.env.NODE_ENV === "production") {
