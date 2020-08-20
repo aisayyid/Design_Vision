@@ -121,6 +121,8 @@ const newImage = new Images({
 // serve up static assets
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "./client/build")))
+}else {
+    app.use(express.static(path.join(__dirname, "./client/public")))
 };
 
 // connect to Mongo DB 
