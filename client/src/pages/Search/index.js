@@ -1,4 +1,6 @@
 import React from 'react';
+import GetData from '../../components/getData';
+//import images api file so we can access the function
 
 
 
@@ -35,7 +37,8 @@ import React from 'react';
 // });
 
 const Search = () => {
-
+//get images  useEffect hook
+//call the api getImages function
     return (
 <div>
 
@@ -47,10 +50,8 @@ const Search = () => {
   {/* <input type="submit" onClick={() => getData()} value="Upload Image" name="submit"/> */}
 </form>
 
-
-
-</div>
-    
+<GetData />
+</div>   
 
     )
 }
