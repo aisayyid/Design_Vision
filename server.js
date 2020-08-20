@@ -7,7 +7,7 @@ const routes = require("./routes");
 var bodyParser = require('body-parser');
 var multer = require ("multer");
 const Images = require("./models/images");
-const fs = require ('fs')
+const fs = require ('fs');
 
 
 // const routes = require("./routes")
@@ -28,7 +28,6 @@ async function quickstart(uploadedFile) {
         keyFilename: "./apiAuthorization.json"
     });
     
-  
     // Performs label detection on the image file
     
     const [result] = await client.labelDetection("./client/public/uploads/" + uploadFilename);
@@ -39,7 +38,6 @@ async function quickstart(uploadedFile) {
     //goes to google returns array
     return labelArray;
   }
-
  
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 
@@ -78,12 +76,12 @@ const storage = multer.diskStorage({
             return next(error);
         }
         // res.send (file);
-        var uploadedFile = file;
+    var uploadedFile = file;
         //await because quickstart takes time waits for return
-        const labelsFinal = await quickstart(uploadedFile);
+    const labelsFinal = await quickstart(uploadedFile);
 
         //model
-        const newImage = new Images({
+    const newImage = new Images({
             imageName: uploadedFile.filename,
             labels: labelsFinal
         })
@@ -92,18 +90,22 @@ const storage = multer.diskStorage({
      Images.find({labels: {$in: labelsFinal}})
      .then(data =>{
          console.log(data)
-     })
-         
-                
-          
-        
-        
-        
-        
-        }).catch(err => console.log(err))
-      
+     })  
+        }).catch(err => console.log(err)) 
     })
 
+    //add a get route to bring back all/one image
+    app.get("/file", (req, res)=>{
+        console.log("Server side route hit");
+        //use the Images collection to do a db query to bring back the images
+        Images.find({})
+        .then(data =>{
+            console.log(data);
+            //sends the data to the client in an express response.
+            res.json(data);
+        })  
+        .catch(err => console.log(err)) 
+    })
 
 // serve up static assets
 if (process.env.NODE_ENV === "production") {
@@ -119,8 +121,6 @@ mongoose.connect(config.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: 
 
 // use routes
 app.use(routes);
-
-// cors(app)
 
 // check for "production" enviroment and set port
 const PORT = process.env.PORT || 3001;
