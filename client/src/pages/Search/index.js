@@ -1,6 +1,7 @@
 
 import imagesAPI from "../../utils/imagesAPI"
 import React, { useEffect, useState } from "react";
+import Card from "../../components/Card/index"
 
 
 const Search = () => {
@@ -52,8 +53,13 @@ const formSubmit = (e) => {
   <input type="file" onChange = {(e) => setImage(e.target.files[0])} name="myImage" accept= "image/*" />
     <input type="submit" value="Upload Image" name="submit"/>
 </form>
+<Card />
 
-</div>   
+</div> 
+
+
+
+
 
     )
 }
