@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { Router, Route, Switch } from "react-router-dom";
 import history from "../history";
 import { useDispatch } from "react-redux";
@@ -13,8 +13,8 @@ import PrivateRoute from "./PrivateRoute";
 import NoMatch from "../pages/NoMatch";
 import Search from "../pages/Search"
 
-
 export const App = () => {
+    
 
     const dispatch = useDispatch();
     useEffect(() => {

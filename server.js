@@ -88,7 +88,7 @@ const storage = multer.diskStorage({
             labels: labelsFinal
         })
         newImage.save().then(image => { res.json(image)
-        console.log(labelsFinal[0])
+    
      Images.find({labels: {$in: labelsFinal}})
      .then(data =>{
          console.log(data)
@@ -103,7 +103,7 @@ const storage = multer.diskStorage({
         }).catch(err => console.log(err))
       
     })
-   
+
 
 // serve up static assets
 if (process.env.NODE_ENV === "production") {
