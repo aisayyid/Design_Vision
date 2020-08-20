@@ -5,15 +5,18 @@ import "./style.css";
 
 // let fileExt = [];
 
-function Card(props) {
+function Card({ image }) {
   return (
-    <div
-      className="card"
-      style={{
-        backgroundImage: props.image ? `url(${props.image})` : "none"
-      }}
-    >
+    <div className = "col-3">
+    <div className="card" style={{width: "18rem;"}}>
+    <img src={`./uploads/${image.imageName}`} className="card-img-top" alt="..."/>
+    <div className="card-body">
+      {image.labels.map(label => (
+        <span className="badge badge-pill badge-info">{label}</span>
+      ))}
     </div>
+    </div>
+  </div>
   );
 }
 
