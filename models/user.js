@@ -17,6 +17,9 @@ const UserSchema = new Schema({
     password: {
         type: String,
         require: true
+    },
+    gallery: {
+    type: Array
     }
 });
 

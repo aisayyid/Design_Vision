@@ -1,12 +1,29 @@
 import React from "react";
 import "./style.css";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
-// const router = require("express").Router();
-// const Image = require ("/models/images.js")
-
-// let fileExt = [];
 
 function Card({ image }) {
+const user = useSelector(state => state.auth.currentUser);
+  //function
+  console.log("this is the user" , user)
+
+  function imageSubmit(imageName){
+    //use axios to post to user dashboard
+    axios.post("/gallery",
+    { //set user to user id
+     user: user._id,
+    //set gallery to image name
+      gallery: imageName
+    //push image into gallery
+    }).then(data => {
+      console.log(data)
+    })
+      .catch(err => console.log(err));
+  };
+
+
   return (
     <div className = "col-3">
     <div className="card" style={{width: "18rem;"}}>
@@ -16,7 +33,7 @@ function Card({ image }) {
         <span className="badge badge-pill badge-info">{label}</span>
       ))}
     </div>
-    <button type="button"  className="btn btn-primary btn-sm">Save to Gallery</button>
+    <button type="button" onClick = {(e) => imageSubmit(image.imageName)} className="btn btn-primary btn-sm">Save to Gallery</button>
     </div>
   </div>
   );

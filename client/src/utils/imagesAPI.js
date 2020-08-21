@@ -9,5 +9,9 @@ getPictures: function() {
 
   createPicture: function(data, headers) {
     return axios.post("/uploadFile", data, headers);
-  }
+  },
+
+//   saveImage: function(data) {
+//     return axios.post("/dashboard", data);
+//   }
 }
