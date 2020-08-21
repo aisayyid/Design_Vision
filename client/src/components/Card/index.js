@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+
 // const router = require("express").Router();
 // const Image = require ("/models/images.js")
 
@@ -15,6 +16,7 @@ function Card({ image }) {
         <span className="badge badge-pill badge-info">{label}</span>
       ))}
     </div>
+    <button type="button"  className="btn btn-primary btn-sm">Save to Gallery</button>
     </div>
   </div>
   );

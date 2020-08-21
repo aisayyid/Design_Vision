@@ -70,6 +70,7 @@ const storage = multer.diskStorage({
         res.sendFile(__dirname + "/client/src/pages/Search/index.js")
     })
     
+    
 //posting JSON data to a route upload file
 app.post('/uploadFile', upload.single('myImage'), async (req, res, next) => {
         const file = req.file;
