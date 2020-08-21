@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import Card from "../../components/Card/index"
 
 
+
+
 const Search = () => {
 
 const [images, setImages] = useState([])
