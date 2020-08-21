@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { Header, Message, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import imagesAPI from "../../utils/imagesAPI"
+import Card from "../../components/Card/index"
 
 export const Home = () => {
     // access to the isAuthenticated property from the auth reducer state
@@ -20,6 +22,25 @@ export const Home = () => {
         }
     }
 
+    const [images, setImages] = useState([])
+const [image, setImage] = useState ("")
+
+useEffect(() => {
+  getThems();
+}, []);
+
+function getThems(){
+  imagesAPI.getPictures()
+  .then(res => {
+    setImages(res.data)
+    console.log(res.data)
+  }
+    ).catch(err => console.log(err))
+}
+
+
+
+
     return (
         <div>
             <Message className="message-container" size="huge" secondary="true">
@@ -30,6 +51,15 @@ export const Home = () => {
                     {showLoginBtn()}
                 </Link>
             </Message>
+            <div className="card-deck row">
+{images.map(img => (
+<Card 
+  image={img}
+/>
+))}
+</div>
+
+
 
         </div>
     )
