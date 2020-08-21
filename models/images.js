@@ -18,4 +18,3 @@ labels: {
 
 module.exports = Images = mongoose.model("image", ImageSchema);
 
-// module.exports = new mongoose.model('image', ImageSchema);
