@@ -9,17 +9,19 @@ const user = useSelector(state => state.auth.currentUser);
   //function
   console.log("this is the user" , user)
 
-  
+  componentDidMount(){
     //use axios to post to user dashboard
-    axios.get("/gallerydisplay", 
-    { 
-    
-
+    axios.get("/gallerydisplay",
+    { //set user to user id
+     user: user._id,
+    //set gallery to image name
+      gallery:[]
+    //push image into gallery
     }).then(data => {
       console.log(data)
     })
       .catch(err => console.log(err));
-  
+}
 
 
   return (
