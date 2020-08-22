@@ -137,9 +137,10 @@ app.post("/gallery", (req, res)=> {
 app.get("/gallerydisplay", (req, res)=>{
     User.findById(req.body.user)
     .then((data) => {
-        console.log("fds");
+     
         //sends the data to the client in an express response.
         res.json(data);
+        console.log("User data", data);
       })
       .catch((err) => console.log(err));
 })

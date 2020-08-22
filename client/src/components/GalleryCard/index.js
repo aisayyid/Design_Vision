@@ -4,24 +4,24 @@
 // import axios from "axios";
 
 
-// function Card({ image }) {
+// function GalleryCard({ image }) {
 // const user = useSelector(state => state.auth.currentUser);
 //   //function
 //   console.log("this is the user" , user)
 
-//   function imageSubmit(imageName){
+//   componentDidMount(){
 //     //use axios to post to user dashboard
-//     axios.post("/gallery",
+//     axios.get("/gallerydisplay",
 //     { //set user to user id
 //      user: user._id,
 //     //set gallery to image name
-//       gallery: imageName
+//       gallery:[]
 //     //push image into gallery
 //     }).then(data => {
 //       console.log(data)
 //     })
 //       .catch(err => console.log(err));
-//   };
+// }
 
 
 //   return (
@@ -29,14 +29,12 @@
 //     <div className="card" style={{width: "18rem;"}}>
 //     <img src={`./uploads/${image.imageName}`} className="card-img-top" alt="..."/>
 //     <div className="card-body">
-//       {image.labels.map(label => (
-//         <span className="badge badge-pill badge-info">{label}</span>
-//       ))}
+//     <p>This is a card</p>
 //     </div>
-//     <button type="button" onClick = {(e) => imageSubmit(image.imageName)} className="btn btn-primary btn-sm">Save to Gallery</button>
+//     <button type="button" className="btn btn-primary btn-sm">Remove from Gallery</button>
 //     </div>
 //   </div>
 //   );
 // }
 
-// export default Card;
+// export default GalleryCard;
