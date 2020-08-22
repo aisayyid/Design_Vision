@@ -2,16 +2,16 @@
 import { Header, Message } from "semantic-ui-react";
 import GalleryCard from "../../components/GalleryCard/index";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import imagesAPI from "../../utils/imagesAPI"
 import { useSelector } from "react-redux";
 
 
 
 export const GalleryPage = () => {
-    const user = useSelector(state => state.auth.currentUser);
+const user = useSelector(state => state.auth.currentUser);
     console.log("this is the user" , user)
-    const [images, setImages] = useState([])
+const [images, setImages] = useState([])
 const [image, setImage] = useState ("")
 
 useEffect(() => {
@@ -21,7 +21,6 @@ useEffect(() => {
 function savedPics(){
 imagesAPI.galleryPictures(user._id)
 .then(res => {
-
 setImages(res.data.gallery)
 console.log("These should be pictures",res.data)
 })

@@ -30,7 +30,7 @@ export const App = () => {
                     <Route path="/" exact component={AllAssets} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    <Route path="/search" component = {Search} />
+                    <PrivateRoute path="/search" component = {Search} />
                     <PrivateRoute path="/dashboard" component={UserDashboard} />
                     <PrivateRoute path="/gallerypage" component={GalleryPage} />
                     <Route component={NoMatch} />
