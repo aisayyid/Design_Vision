@@ -4,7 +4,7 @@ import history from "../history";
 import { useDispatch } from "react-redux";
 import { loadUser } from "../actions/authActions";
 import NavBar from "./NavBar";
-import Home from "../pages/Home";
+import AllAssets from "../pages/AllAssets";
 import UserDashboard from "../pages/UserDashboard";
 import GalleryPage from "../pages/GalleryPage";
 import Login from "../pages/Login";
@@ -27,7 +27,7 @@ export const App = () => {
             <Router history={history}>
                 <NavBar />
                 <Switch>
-                    <Route path="/" exact component={Home} />
+                    <Route path="/" exact component={AllAssets} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route path="/search" component = {Search} />

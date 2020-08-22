@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import imagesAPI from "../../utils/imagesAPI"
 import Card from "../../components/Card/index"
 
-export const Home = () => {
+export const AllAssets = () => {
     // access to the isAuthenticated property from the auth reducer state
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
 
@@ -44,7 +44,7 @@ function getThems(){
     return (
         <div>
             <Message className="message-container" size="huge" secondary="true">
-                <Header size="huge"> Home</Header>
+                <Header size="huge"> All Assets</Header>
                 <p style={{ marginBottom: "5px" }}>This is a Boiler Plate MERN application with authentication using JSON Web Tokens.</p>
                 <p style={{ margin: "5px 0 25px" }}>This APP was design to be used as a starting point for any developer looking to integrate authentication with a MERN application.</p>
                 <Link to="/login">
@@ -65,4 +65,4 @@ function getThems(){
     )
 };
 
-export default Home;
+export default AllAssets;
