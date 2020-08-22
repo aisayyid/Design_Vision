@@ -1,5 +1,7 @@
 import React from "react";
 import "./style.css";
+import imagesAPI from "../../utils/imagesAPI"
+import { useSelector } from "react-redux";
 
 
 function GalleryCard({ image }) {
@@ -8,18 +10,15 @@ function GalleryCard({ image }) {
   //function
   console.log("this is the user" , user)
 
-  function imageDelete(imageName){
+  function imageDelete(){
     //delete method
-    axios.delete("/gallerydelete",
-    { //using id
-     user: user._id,
-    //delete image from gallery array
-      gallery: imageName
-    }).then(data => {
-      console.log(data)
+    imagesAPI.deletePicture(user._id)
+    .then(res => {
+
+    console.log("These should be pictures",res)
     })
       .catch(err => console.log(err));
-  };
+    }
 
   return (
     <div className = "col-3">

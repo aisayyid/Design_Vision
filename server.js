@@ -144,7 +144,7 @@ app.get("/gallerydisplay/:id", (req, res)=>{
     .catch((err) => console.log(err));
 })
 app.delete("/gallerydelete/:id", (req, res)=>{
-  User.findByIdAndUpdate(req.body.user, { $unset: { gallery: req.body.gallery }}, {new:true})
+  User.findByIdAndUpdate(req.params.id, { $unset: { gallery: req.body.gallery }}, {new:true})
   .then((data) => {
 //sends the data to the client in an express response.
       res.json(data);
