@@ -82,6 +82,7 @@ module.exports = {
                         token,
                         firstname: user.firstname,
                         lastname: user.lastname,
+                        _id: user._id,
                         email
                     })
                 })

@@ -125,7 +125,7 @@ app.get("/file", (req, res) => {
 
 app.post("/gallery", (req, res)=> {
     console.log("dashboard hit", req.body);
-    User.findByIdAndUpdate(req.body.user, { $push: { gallery: req.body.gallery }})
+    User.findByIdAndUpdate(req.body.user, { $push: { gallery: req.body.gallery }}, {new:true})
     .then((data) => {
         console.log("dashboard data" , data);
         //sends the data to the client in an express response.
@@ -134,15 +134,14 @@ app.post("/gallery", (req, res)=> {
       .catch((err) => console.log(err));
 })
 
-app.get("/gallerydisplay", (req, res)=>{
-    User.findById(req.body.user)
-    .then((data) => {
-     
-        //sends the data to the client in an express response.
-        res.json(data);
-        console.log("User data", data);
-      })
-      .catch((err) => console.log(err));
+app.get("/gallerydisplay/:id", (req, res)=>{
+  User.findById(req.params.id)
+  .then((data) => {
+//sends the data to the client in an express response.
+      res.json(data);
+      console.log("GOT THE FUCKIN User data", data);
+    })
+    .catch((err) => console.log(err));
 })
 
 // serve up static assets
