@@ -98,12 +98,19 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
     //set labels to the labels final const
     labels: labelsFinal,
   });
+  console.log(labelsFinal.value)
+  // for (let i = 0; i < labelsFinal.length; i++) {
+  //   if(labelsFinal.value){
+    
+  //   }
+    
+  // }
   //save a new image as JSON
   newImage
     .save()
     .then((image) => {
       //use the collection to find images with labels in common
-      Images.find({ labels: { $in: labelsFinal } }).then((data) => {
+      Images.find({ labels: { $in: labelsFinal } }).sort({ labels : -1}).then((data) => {
         res.json(data);
       });
     })
