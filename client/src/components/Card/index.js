@@ -25,7 +25,7 @@ const user = useSelector(state => state.auth.currentUser);
 
 
   return (
-    <div className = "col-4">
+    <div className = "col-sm-4">
     <div className="card" style={{width: "18rem;"}}>
     <img src={`./uploads/${image.imageName}`} className="card-img-top" alt="..."/>
     <div className="card-body">
