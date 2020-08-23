@@ -28,6 +28,7 @@ export const App = () => {
                 <NavBar />
                 <Switch>
                     <Route path="/" exact component={Login} />
+                    <Route path="/allassets" component={AllAssets} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <PrivateRoute path="/search" component = {Search} />
