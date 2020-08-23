@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import imagesAPI from "../../utils/imagesAPI"
 import Card from "../../components/Card/index"
+import "./allassets.css"
 
 export const AllAssets = () => {
     // access to the isAuthenticated property from the auth reducer state
