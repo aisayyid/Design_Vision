@@ -30,7 +30,7 @@ const Login = (props) => {
     }
 
     return (
-        <div className="form-container">
+        <div  className="form-container">
             <Header as='h2' secondary="true" textAlign='center'>
                 Login to your account
                 </Header>
