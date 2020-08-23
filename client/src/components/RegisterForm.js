@@ -26,8 +26,8 @@ const RegisterForm = (props) => {
 
             <Form onSubmit={props.handleSubmit(props.onSubmit)} size='large'>
 
-                <Segment>
-                    <Field
+                <Segment >
+                    <Field 
                         name="firstname"
                         component={renderInput}
                         label="Enter Name"
@@ -48,12 +48,12 @@ const RegisterForm = (props) => {
                         component={renderInput}
                         label="Password"
                     />
-                    <Button secondary fluid size='large'>
+                    <Button style={{backgroundColor:"#005DFF"}} secondary fluid size='large'>
                         {props.buttonText}
                     </Button>
                 </Segment>
             </Form>
-            <Message>
+            <Message style={{backgroundColor:"#FFA200"}}>
                 {props.renderMessage()}
             </Message>
         </>

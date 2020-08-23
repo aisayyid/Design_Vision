@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LoginForm from "../../components/LoginForm";
 import { loginUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
+import "./login.css"
 
 
 const Login = (props) => {
