@@ -51,6 +51,7 @@ function getThems(){
                     {showLoginBtn()}
                 </Link>
             </Message>
+            <div className="container">
             <div className="card-deck row">
 {images.map(img => (
 <Card 
@@ -61,6 +62,7 @@ function getThems(){
 
 
 
+        </div>
         </div>
     )
 };

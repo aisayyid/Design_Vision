@@ -21,13 +21,11 @@ function GalleryCard({ image }) {
     }
 
   return (
-    <div className = "col-3">
+    <div className = "col-4">
     <div className="card" style={{width: "18rem;"}}>
-    <img src={`./uploads/${image}`} className="card-img-top" alt="..."/>
-    <div className="card-body">
- 
-    </div>
-    <button type="button" onClick = {(e) => imageDelete(image.imageName)} className="btn btn-primary btn-sm">Remove from Gallery</button>
+    <img src={`./uploads/${image}`} className="card-img-top" alt="..." id="galleryimg"/>
+   
+    <button type="button" onClick = {(e) => imageDelete(image.imageName)} className="btn btn-primary btn-sm" id="delete">Remove from Gallery</button>
     </div>
   </div>
   );

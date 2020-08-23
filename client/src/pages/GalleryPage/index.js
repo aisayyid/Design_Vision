@@ -33,12 +33,14 @@ console.log("These should be pictures",res.data)
                 <Header size="huge"> Personal Gallery </Header>
                 <p>This is a Protected Route</p>
             </Message>
+            <div className="container">
             <div className="card-deck row">
                 {images.map(img => (
                     <GalleryCard
                         image={img}
                     />
                 ))}
+            </div>
             </div>
         </>
 

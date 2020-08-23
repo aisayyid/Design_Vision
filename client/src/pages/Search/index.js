@@ -55,12 +55,14 @@ const formSubmit = (e) => {
   <input type="file" onChange = {(e) => setImage(e.target.files[0])} name="myImage" accept= "image/*" />
     <input type="submit" value="Upload Image" name="submit"/>
 </form>
+<div className="container">
 <div className="card-deck row">
 {images.map(img => (
 <Card 
   image={img}
 />
 ))}
+</div>
 </div>
 </div> 
 
