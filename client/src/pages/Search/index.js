@@ -52,16 +52,19 @@ const Search = () => {
 
   return (
     <>
-      <Message className="message-container" size="huge" secondary="true">
-        <Header size="huge"> Search Assets</Header>
+       <div className="jumbotron jumbotron-fluid" id="searchjumbo">
+  <h1 className="display-4">All Assets</h1>
+
+
         <p>Choose an image to upload, then press upload image.  We will then search the database for images most visually similar to yours.</p>
         <form onSubmit={formSubmit}>
 
           <input type="file" onChange={(e) => setImage(e.target.files[0])} name="myImage" accept="image/*" id="choosefile" />
           <button type="submit button" value="Upload Image" name="submit" class="btn btn-primary">Upload Image</button>
         </form>
-      </Message>
+        </div>
       <div>
+    
 
 
         <div className="container">

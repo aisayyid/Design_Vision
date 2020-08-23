@@ -43,14 +43,13 @@ function getThems(){
 
 
     return (
+
+        
         <div>
-            <Message className="message-container" size="huge" secondary="true">
-                <Header size="huge"> All Assets</Header>
-              
-                <Link to="/login">
-                    {showLoginBtn()}
-                </Link>
-            </Message>
+                   <div className="jumbotron jumbotron-fluid" id="alljumbo">
+  <h1 className="display-4">All Assets</h1>
+
+</div>
             <div className="container">
             <div className="card-deck row">
 {images.map(img => (
