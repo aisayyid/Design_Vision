@@ -31,7 +31,7 @@ console.log("These should be pictures",res.data)
         <>
             <Message className="message-container" size="huge" secondary="true">
                 <Header size="huge"> Personal Gallery </Header>
-                <p>This is a Protected Route</p>
+  
             </Message>
             <div className="container">
             <div className="card-deck row">

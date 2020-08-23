@@ -1,7 +1,8 @@
 
 import imagesAPI from "../../utils/imagesAPI"
 import React, { useEffect, useState } from "react";
-import Card from "../../components/Card/index"
+import Card from "../../components/Card/index";
+import { Header, Message } from "semantic-ui-react";
 
 
 
@@ -48,13 +49,19 @@ const formSubmit = (e) => {
 
 
     return (
-<div>
-{console.log(images)}
-<form onSubmit={formSubmit}>
+      <>
+       <Message className="message-container" size="huge" secondary="true">
+                <Header size="huge"> Search Assets</Header>
+              <p>Choose an image to upload, then press upload image.  We will then search the database for images most visually similar to yours.</p>
+              <form onSubmit={formSubmit}>
   Select image to upload:
   <input type="file" onChange = {(e) => setImage(e.target.files[0])} name="myImage" accept= "image/*" />
     <input type="submit" value="Upload Image" name="submit"/>
 </form>
+            </Message>
+<div>
+  
+
 <div className="container">
 <div className="card-deck row">
 {images.map(img => (
@@ -67,7 +74,7 @@ const formSubmit = (e) => {
 </div> 
 
 
-
+</>
 
 
     )
