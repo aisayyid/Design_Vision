@@ -16,15 +16,6 @@ const Search = () => {
     // getThems();
   }, []);
 
-  // function getThems(){
-  //   imagesAPI.getPictures()
-  //   .then(res => {
-  //     setImages(res.data)
-  //     console.log(res.data)
-  //   }
-  //     ).catch(err => console.log(err))
-  // }
-
   const formSubmit = (e) => {
     e.preventDefault();
     //new form obj
@@ -37,6 +28,7 @@ const Search = () => {
         'content-type': 'multipart/form-data'
       }
     }
+  
     //a post call to /file
     imagesAPI.createPicture(formData, config)
       .then(res => {
