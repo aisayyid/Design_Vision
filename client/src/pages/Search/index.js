@@ -56,7 +56,7 @@ const Search = () => {
                     pauseOnHover
                 />
        <div className="jumbotron jumbotron-fluid" id="searchjumbo">
-  <h1 className="display-4">Search Assets</h1>
+  <h1 className="display-4" id="searchh1">Search Assets</h1>
 
 
         <p>Choose an image to upload, then press upload image.  We will then search the database for images most visually similar to yours.</p>
