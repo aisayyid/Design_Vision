@@ -34,7 +34,6 @@ async function quickstart(uploadedFile) {
   return labelArray.sort();
 }
 //////////GOOGLE VISIONS CODE//////////
-
 // middleware to parse data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -73,9 +72,10 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
     const error = new Error("please upload");
     error.httpStatusCode = 400;
     return next(error);
+
   };
 
- //sets a variable for uploaded file to the posted file
+
   var uploadedFile = file;
  //await because quickstart takes time waits for return
   //create variable lables final
