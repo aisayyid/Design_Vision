@@ -21,6 +21,11 @@ const Register = () => {
     return (
 
         <div className="form-container">
+               <div id="logo">
+            <img src={require("../../heroimages/Asset 3.png")} 
+        id="logo"
+          alt="me" />
+            </div>
             <Header as='h2' secondary="true" textAlign='center'>
                 Register
             </Header>
