@@ -23,7 +23,6 @@ export const GalleryPage = () => {
         imagesAPI.galleryPictures(user._id)
             .then(res => {
                 setImages(res.data.gallery)
-                console.log("These should be pictures", res.data)
             })
             .catch(err => console.log(err));
     }
