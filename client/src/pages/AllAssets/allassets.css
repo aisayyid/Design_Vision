@@ -2,5 +2,10 @@
     background-image: url("../../heroimages/shutterstock_1715431357.jpg");
     background-size: cover;
     text-align: center;
-    color:white
+    color:white;
+    padding-bottom: 10% !important;
 }
+
+/* .display-4{
+    margin-top: 5% !important;
+} */
