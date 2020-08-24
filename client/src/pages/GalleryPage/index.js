@@ -39,6 +39,7 @@ export const GalleryPage = () => {
                     {images.map(img => (
                         <GalleryCard
                             image={img}
+                            refreshImage={savedPics}
                         />
                     ))}
                 </div>

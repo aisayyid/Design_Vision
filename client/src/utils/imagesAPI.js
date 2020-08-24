@@ -13,8 +13,11 @@ getPictures: function() {
   createPicture: function(data, headers) {
     return axios.post("/uploadFile", data, headers);
   },
-  deletePicture: function(id) {
-    return axios.delete(`/gallerydelete/${id}`);
+  deletePicture: function(id, image) {
+    return axios({
+      method:"DELETE",
+      url: `/gallerydelete/${id}`,
+      data: {image}
+    });
   },
-
 }
