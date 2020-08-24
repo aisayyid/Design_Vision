@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 
 function Card({ image }) {
@@ -19,6 +20,7 @@ const user = useSelector(state => state.auth.currentUser);
     //push image into gallery
     }).then(data => {
       console.log(data)
+      toast.success("Image saved!")
     })
       .catch(err => console.log(err));
   };

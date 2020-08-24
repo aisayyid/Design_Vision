@@ -73,13 +73,29 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
     const error = new Error("please upload");
     error.httpStatusCode = 400;
     return next(error);
-  }
-  //sets a variable for uploaded file to the posted file
+  };
+
+ //sets a variable for uploaded file to the posted file
   var uploadedFile = file;
-  //await because quickstart takes time waits for return
+ //await because quickstart takes time waits for return
   //create variable lables final
   const labelsFinal = await quickstart(uploadedFile);
   //compare imagelabelobj to other images
+
+  const rows = await Images.find({imageName: uploadedFile.filename})
+  // .lean()
+  // .then((rows)=>{
+  //   console.log("found something")
+  // })
+
+  if (rows.length > 0) {
+    // console.log("duplicate")
+    const error = new Error("duplicate");
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+ 
+ 
 
   //set up new image const equal to the model
   const newImage = new Images({
@@ -148,7 +164,10 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
           // console.log(sortedData)
         }); //end of the find
     })
-    .catch((err) => console.log(err)); //end of the db save
+    .catch((err) => {
+      res.json({message: "duplicate"})
+      // console.log(err)
+    }); //end of the db save
 }); //end of the post
 
 //add a get route to bring back all/one image

@@ -5,6 +5,7 @@ import Card from "../../components/Card/index";
 import { Header, Message } from "semantic-ui-react";
 import "./search.css";
 
+import { ToastContainer } from 'react-toastify';
 
 const Search = () => {
 
@@ -43,12 +44,25 @@ const Search = () => {
         console.log("this is the dataaaa", res.data)
         setImages([...new Set(res.data)])
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+         console.log(err)
+      })
   }
 
 
   return (
     <>
+    <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
        <div className="jumbotron jumbotron-fluid" id="searchjumbo">
   <h1 className="display-4">Search Assets</h1>
 
