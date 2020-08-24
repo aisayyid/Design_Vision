@@ -6,10 +6,8 @@ import { Header, Message } from "semantic-ui-react";
 import "./search.css";
 
 
-
-
-
 const Search = () => {
+
 
   const [images, setImages] = useState([])
   const [image, setImage] = useState("")
@@ -43,11 +41,10 @@ const Search = () => {
     imagesAPI.createPicture(formData, config)
       .then(res => {
         console.log("this is the dataaaa", res.data)
-        setImages(res.data)
+        setImages([...new Set(res.data)])
       })
       .catch(err => console.log(err))
   }
-
 
 
   return (
