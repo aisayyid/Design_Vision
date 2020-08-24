@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../../components/Card/index";
 import { Header, Message } from "semantic-ui-react";
 import "./search.css";
-
+import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
 const Search = () => {
