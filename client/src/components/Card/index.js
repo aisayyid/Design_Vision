@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-
+//please work
 function Card({ image }) {
 const user = useSelector(state => state.auth.currentUser);
   //function
