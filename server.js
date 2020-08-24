@@ -9,13 +9,7 @@ var multer = require("multer");
 const Images = require("./models/images");
 const fs = require("fs");
 const User = require("./models/user");
-// const Gallery = require("./models/gallery");
-// const db = require("./models");
-
-// const routes = require("./routes")
-// const cors = require("./client/src/cors")
-//Here you go Sarah, delete this comment later.
-
+const { findConfidence } = require("./utils/imageSearch");
 const app = express();
 
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
@@ -24,25 +18,23 @@ async function quickstart(uploadedFile) {
   // Imports the Google Cloud client library
   const vision = require("@google-cloud/vision");
 
-  // Creates a client
+// Creates a client
   const client = new vision.ImageAnnotatorClient({
     keyFilename: "./apiAuthorization.json",
   });
 
-  // Performs label detection on the image file
+// Performs label detection on the image file
 
   const [result] = await client.labelDetection(
     "./client/public/uploads/" + uploadFilename
   );
   const labels = result.labelAnnotations;
   const labelArray = [];
-  console.log("Labels:");
   labels.forEach((label) => labelArray.push(label.description));
   //goes to google returns array
-  return labelArray;
+  return labelArray.sort();
 }
-
-//////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
+//////////GOOGLE VISIONS CODE//////////
 
 // middleware to parse data
 app.use(express.urlencoded({ extended: true }));
@@ -51,14 +43,13 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// app.use(express.static(path.join(__dirname, "../DesignersFriends_Database/")))
 //setting up multer
 const storage = multer.diskStorage({
   //telling the destination of where to save the files
   destination: function (req, file, cb) {
     cb(null, __dirname + "/client/public/uploads/");
   },
-  //setting up file name
+//setting up file name
   filename: function (req, file, cb) {
     cb(
       null,
@@ -71,53 +62,52 @@ const upload = multer({ storage: storage });
 
 //we are pulling back the form data from search
 app.get("/search", (req, res) => {
-  //res sendfile grabs from path
+//res sendfile grabs from path
   res.sendFile(__dirname + "/client/src/pages/Search/index.js");
 });
 
 //posting JSON data to a route upload file
 app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
   const file = req.file;
-  console.log("heres the file", file);
-  console.log("req.body", req.body);
   //if there is not a file there is an error
   if (!file) {
     const error = new Error("please upload");
     error.httpStatusCode = 400;
     return next(error);
   }
-  //sets a variable for uploaded file to the posted file
-  var uploadedFile = file;
+//sets a variable for uploaded file to the posted file
+var uploadedFile = file;
   //await because quickstart takes time waits for return
   //create variable lables final
-  const labelsFinal = await quickstart(uploadedFile);
+const labelsFinal = await quickstart(uploadedFile);
+//compare imagelabelobj to other images
 
-  //set up new image const equal to the model
-  const newImage = new Images({
+//set up new image const equal to the model
+const newImage = new Images({
     imageName: uploadedFile.filename,
-    //set labels to the labels final const
-    labels: labelsFinal,
+//set labels to the labels final const
+    labels: labelsFinal
   });
-  //save a new image as JSON
+//save a new image as JSON
   newImage
     .save()
     .then((image) => {
-      //use the collection to find images with labels in common
-      Images.find({ labels: { $in: labelsFinal } }).then((data) => {
-        res.json(data);
-      });
-    })
-    .catch((err) => console.log(err));
-});
+
+//use the collection to find images with labels in common
+Images.find({ labels: { $in: labelsFinal } }).lean().then((data) => {
+let dataArray = findConfidence(data, labelsFinal);
+        res.json(dataArray);
+    });//end of the find 
+  }).catch((err) => console.log(err));//end of the db save
+});//end of the post
 
 //add a get route to bring back all/one image
 app.get("/file", (req, res) => {
   console.log("Server side route hit");
-  //use the Images collection to do a db query to bring back all images for testing
+//use the Images collection to do a db query to bring back all images for testing
   Images.find({})
     .then((data) => {
-      console.log(data);
-      //sends the data to the client in an express response.
+//sends the data to the client in an express response.
       res.json(data);
     })
     .catch((err) => console.log(err));
@@ -127,7 +117,6 @@ app.post("/gallery", (req, res)=> {
     console.log("dashboard hit", req.body);
     User.findByIdAndUpdate(req.body.user, { $push: { gallery: req.body.gallery }}, {new:true})
     .then((data) => {
-        console.log("dashboard data" , data);
         //sends the data to the client in an express response.
         res.json(data);
       })
@@ -143,6 +132,7 @@ app.get("/gallerydisplay/:id", (req, res)=>{
     })
     .catch((err) => console.log(err));
 })
+
 app.delete("/gallerydelete/:id", (req, res)=>{
   User.findByIdAndUpdate(req.params.id, { $unset: { gallery: req.body.gallery }}, {new:true})
   .then((data) => {

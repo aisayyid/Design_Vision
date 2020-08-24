@@ -29,6 +29,9 @@ const user = useSelector(state => state.auth.currentUser);
     <div className="card" style={{width: "18rem;"}}>
     <img src={`./uploads/${image.imageName}`} className="card-img-top" alt="..."/>
     <div className="card-body">
+      <p>
+        {image.confidence}
+    </p>
       {image.labels.map(label => (
         <span className="badge badge-pill badge-info">{label}</span>
       ))}
