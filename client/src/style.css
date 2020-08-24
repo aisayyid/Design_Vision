@@ -1,7 +1,18 @@
+body{
+    background-color:#e8f6ff;
+    font-family: 'Forum', cursive;
+}
+
 /* NavBar Styling */
 .ui.menu:first-child {
     margin-top: 0;
     margin-bottom: 0;
+    background-color:#02005b;
+    position:fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+
 }
 
 /* Jumbotron/Message styling */

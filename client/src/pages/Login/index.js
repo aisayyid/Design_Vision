@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LoginForm from "../../components/LoginForm";
 import { loginUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
+import "./login.css"
 
 
 const Login = (props) => {
@@ -29,7 +30,7 @@ const Login = (props) => {
     }
 
     return (
-        <div className="form-container">
+        <div  className="form-container">
             <Header as='h2' secondary="true" textAlign='center'>
                 Login to your account
                 </Header>

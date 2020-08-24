@@ -14,7 +14,7 @@ import NoMatch from "../pages/NoMatch";
 import Search from "../pages/Search"
 
 export const App = () => {
-    
+
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -27,10 +27,11 @@ export const App = () => {
             <Router history={history}>
                 <NavBar />
                 <Switch>
-                    <Route path="/" exact component={AllAssets} />
+                    <Route path="/" exact component={Login} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    <PrivateRoute path="/search" component = {Search} />
+                    <PrivateRoute path="/allassets" component={AllAssets} />
+                    <PrivateRoute path="/search" component={Search} />
                     <PrivateRoute path="/dashboard" component={UserDashboard} />
                     <PrivateRoute path="/gallerypage" component={GalleryPage} />
                     <Route component={NoMatch} />

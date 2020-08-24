@@ -88,6 +88,7 @@ const newImage = new Images({
 //set labels to the labels final const
     labels: labelsFinal
   });
+
 //save a new image as JSON
   newImage
     .save()

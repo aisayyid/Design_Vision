@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import imagesAPI from "../../utils/imagesAPI"
 import Card from "../../components/Card/index"
+import "./allassets.css"
 
 export const AllAssets = () => {
     // access to the isAuthenticated property from the auth reducer state
@@ -42,15 +43,14 @@ function getThems(){
 
 
     return (
+
+        
         <div>
-            <Message className="message-container" size="huge" secondary="true">
-                <Header size="huge"> All Assets</Header>
-                <p style={{ marginBottom: "5px" }}>This is a Boiler Plate MERN application with authentication using JSON Web Tokens.</p>
-                <p style={{ margin: "5px 0 25px" }}>This APP was design to be used as a starting point for any developer looking to integrate authentication with a MERN application.</p>
-                <Link to="/login">
-                    {showLoginBtn()}
-                </Link>
-            </Message>
+                   <div className="jumbotron jumbotron-fluid" id="alljumbo">
+  <h1 className="display-4">All Assets</h1>
+
+</div>
+            <div className="container">
             <div className="card-deck row">
 {images.map(img => (
 <Card 
@@ -61,6 +61,7 @@ function getThems(){
 
 
 
+        </div>
         </div>
     )
 };

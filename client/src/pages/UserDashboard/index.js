@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, Message } from "semantic-ui-react";
 import { useSelector } from "react-redux";
+import "./userdashboard.css";
 
 
 export const UserDashboard = () => {
@@ -9,11 +10,12 @@ export const UserDashboard = () => {
 
     return (
         <>
-            <Message className="message-container" size="huge" secondary="true">
-                <Header size="huge"> User Dashboard </Header>
-                <p>This is a Protected Route</p>
+             <div className="jumbotron jumbotron-fluid" id="dashjumbo">
+                <h1 className="display-4">Account Information</h1>
+
                 <p>Welcome {user ? user.email : ""}</p>
-            </Message>
+           
+                </div>
         </>
     )
 }
