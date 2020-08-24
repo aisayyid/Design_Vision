@@ -3,26 +3,15 @@ import imagesAPI from "../../utils/imagesAPI"
 import React, { useEffect, useState } from "react";
 import Card from "../../components/Card/index"
 
-
-
-
 const Search = () => {
 
 const [images, setImages] = useState([])
 const [image, setImage] = useState ("")
 
-useEffect(() => {
-  // getThems();
-}, []);
+// useEffect(() => {
+// }, []);
 
-// function getThems(){
-//   imagesAPI.getPictures()
-//   .then(res => {
-//     setImages(res.data)
-//     console.log(res.data)
-//   }
-//     ).catch(err => console.log(err))
-// }
+
 
 const formSubmit = (e) => {
   e.preventDefault();
@@ -40,14 +29,12 @@ const formSubmit = (e) => {
   imagesAPI.createPicture(formData, config)
       .then(res => {
         console.log("this is the dataaaa", res.data)
-        setImages(res.data)
+        setImages([...new Set(res.data)])
       })
       .catch(err => console.log(err))
 }
 
-
-
-    return (
+  return (
 <div>
 {console.log(images)}
 <form onSubmit={formSubmit}>
@@ -63,11 +50,6 @@ const formSubmit = (e) => {
 ))}
 </div>
 </div> 
-
-
-
-
-
     )
 }
 
