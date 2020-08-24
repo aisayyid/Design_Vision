@@ -1,11 +1,15 @@
 .card {
     border: 6px solid white;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    margin-top: 20px;  
+    margin-top: 20px; 
+    width:375px;
+    height:375px;
   }
 
   img{
+    /* object-fit: cover; */
     height: 70%;
+    aspect-ratio: 1/1;
   }
 
   
