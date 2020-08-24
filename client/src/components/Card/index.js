@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 
 function Card({ image }) {
@@ -19,6 +20,7 @@ const user = useSelector(state => state.auth.currentUser);
     //push image into gallery
     }).then(data => {
       console.log(data)
+      toast.success("Image saved!")
     })
       .catch(err => console.log(err));
   };
@@ -26,7 +28,7 @@ const user = useSelector(state => state.auth.currentUser);
 
   return (
     <div className = "col-sm-4">
-    <div className="card" style={{width: "18rem;"}}>
+    <div className="card" style={{width: "18rem;"}} id="searchcards">
     <img src={`./uploads/${image.imageName}`} className="card-img-top" alt="..."/>
     <div className="card-body">
       <p>

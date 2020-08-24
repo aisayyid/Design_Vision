@@ -11,7 +11,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "./PrivateRoute";
 import NoMatch from "../pages/NoMatch";
-import Search from "../pages/Search"
+import Search from "../pages/Search";
+import { ToastContainer } from 'react-toastify';
 
 export const App = () => {
 
@@ -26,6 +27,17 @@ export const App = () => {
         <>
             <Router history={history}>
                 <NavBar />
+                <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 <Switch>
                     <Route path="/" exact component={Login} />
                     <Route path="/login" component={Login} />

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Header, Message, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import imagesAPI from "../../utils/imagesAPI"
-import Card from "../../components/Card/index"
-import "./allassets.css"
+import imagesAPI from "../../utils/imagesAPI";
+import Card from "../../components/Card/index";
+import "./allassets.css";
+import { ToastContainer } from 'react-toastify';
 
 export const AllAssets = () => {
     // access to the isAuthenticated property from the auth reducer state
@@ -46,6 +47,17 @@ function getThems(){
 
         
         <div>
+           <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                    <div className="jumbotron jumbotron-fluid" id="alljumbo">
   <h1 className="display-4">All Assets</h1>
 
