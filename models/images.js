@@ -6,7 +6,8 @@ var ImageSchema = new Schema({
 
 imageName: {
     type: String,
-    required: true
+    required: true,
+    unique: true
 },
 
 labels: {
