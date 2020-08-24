@@ -20,7 +20,7 @@ const user = useSelector(state => state.auth.currentUser);
     //push image into gallery
     }).then(data => {
       console.log(data)
-      toast.success("Image saved!")
+      toast.dark("Image saved!")
     })
       .catch(err => console.log(err));
   };
