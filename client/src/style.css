@@ -2,7 +2,6 @@ body{
     background-color:#e8f6ff;
     font-family: 'Forum', cursive;
 }
-
 /* NavBar Styling */
 .ui.menu:first-child {
     margin-top: 0;
@@ -14,7 +13,6 @@ body{
     z-index: 1;
 
 }
-
 /* Jumbotron/Message styling */
 .ui.message.message-container {
     text-align: center;

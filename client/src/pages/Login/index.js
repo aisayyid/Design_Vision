@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Header } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,7 +17,6 @@ const Login = (props) => {
         if (isAuthenticated) {
             props.history.push("/gallerypage")
         }
-
     })
 
     const renderFormMessage = () => {
@@ -30,11 +28,11 @@ const Login = (props) => {
     }
 
     return (
-        <div  className="form-container">
+        <div className="form-container">
             <div id="logo">
-            <img src={require("../../heroimages/Asset 3.png")} 
-        id="logo"
-          alt="me" />
+                <img src={require("../../heroimages/Asset 3.png")}
+                    id="logo"
+                    alt="me" />
             </div>
             <Header as='h2' secondary="true" textAlign='center'>
                 Login to your account

@@ -19,7 +19,7 @@ const UserSchema = new Schema({
         require: true
     },
     gallery: {
-    type: Array,
+        type: Array,
     }
 });
 

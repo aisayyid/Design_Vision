@@ -10,12 +10,12 @@ export const UserDashboard = () => {
 
     return (
         <>
-             <div className="jumbotron jumbotron-fluid" id="dashjumbo">
+            <div className="jumbotron jumbotron-fluid" id="dashjumbo">
                 <h1 className="display-4">Account Information</h1>
 
                 <p>Welcome {user ? user.email : ""}</p>
-           
-                </div>
+
+            </div>
         </>
     )
 }

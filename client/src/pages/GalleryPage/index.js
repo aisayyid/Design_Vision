@@ -35,6 +35,7 @@ export const GalleryPage = () => {
             </div>
             <div className="container">
                 <div className="card-deck row">
+                    
                     {images.map(img => (
                         <GalleryCard
                             image={img}

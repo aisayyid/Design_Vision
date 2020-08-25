@@ -9,7 +9,6 @@ import { ToastContainer } from 'react-toastify';
 
 const Search = () => {
 
-
   const [images, setImages] = useState([])
   const [image, setImage] = useState("")
 
@@ -29,7 +28,7 @@ const Search = () => {
         'content-type': 'multipart/form-data'
       }
     }
-  
+
     //a post call to /file
     imagesAPI.createPicture(formData, config)
       .then(res => {
@@ -37,38 +36,32 @@ const Search = () => {
         setImages([...new Set(res.data)])
       })
       .catch(err => {
-         console.log(err)
+        console.log(err)
       })
   }
-
-
   return (
     <>
-    <ToastContainer
-                    position="top-center"
-                    autoClose={5000}
-                    hideProgressBar
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
-       <div className="jumbotron jumbotron-fluid" id="searchjumbo">
-  <h1 className="display-4" id="searchh1">Search Assets</h1>
-
-
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div className="jumbotron jumbotron-fluid" id="searchjumbo">
+        <h1 className="display-4" id="searchh1">Search Assets</h1>
         <p>Choose an image to upload, then press upload image.  We will then search the database for images most visually similar to yours.</p>
         <form onSubmit={formSubmit}>
 
-          <input type="file" onChange={(e) => setImage(e.target.files[0])} name="myImage" accept="image/*"/>
+          <input type="file" onChange={(e) => setImage(e.target.files[0])} name="myImage" accept="image/*" />
           <button type="submit button" value="Upload Image" name="submit" class="btn btn-primary">Upload Image</button>
         </form>
-        </div>
+      </div>
       <div>
-    
-
 
         <div className="container">
           <div className="card-deck row">
@@ -80,11 +73,7 @@ const Search = () => {
           </div>
         </div>
       </div>
-
-
     </>
-
-
   )
 }
 
