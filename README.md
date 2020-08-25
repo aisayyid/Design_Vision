@@ -10,7 +10,7 @@
   - [SpecialThanks!](#SpecialThanks!)
   - [Questions](#Questions)
   ## Installation
-  
+  npm i
   ## Usage
   
   ## License
