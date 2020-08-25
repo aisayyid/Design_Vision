@@ -209,7 +209,7 @@ app.delete("/gallerydelete/:id", (req, res) => {
     { new: true }
   )
     .then((data) => {
-      //sends the data to the client in an express response.
+      //Sends the data to the client in an express response.
       res.json(data);
       console.log("Delete route data", data);
     })
