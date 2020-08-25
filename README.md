@@ -7,7 +7,7 @@
   - [Usage](#Usage)
   - [License](#License)
   - [Deployed](#Deployed)
-  - [SpecialThanksTo:](#SpecialThanksTo:)
+  - [SpecialThanksTo](#SpecialThanksTo)
   - [Questions](#Questions)
   ## Installation
   npm i
@@ -15,6 +15,7 @@
   - The user can create an account and login.
   
   ![](/screenshots/dvregister.png)
+  
   ![](/screenshots/dvlogin.png)
 
   - Once they are logged in, they can upload the image they want to find reference art to by pressing the choose file button and then pressing upload.
@@ -28,19 +29,19 @@
    - The user now has the option to save any of the images from the search results to their personal assets page called "my assets", and the image uploaded will also now be stored in the database and available to view in the "all assets" page along with all the other images in the database, where the user can also look for images to save to their personal assets page.
 
    ![](/screenshots/dvmyassets.jpg)
+   
    ![](/screenshots/dvallassets.jpg)
 
   ## License
   MIT
   ## Deployed
   
-  ## SpecialThanksTo:
+  ## SpecialThanksTo
  - Jorge Alvarez, [GitHub] (https://github.com/jaab30).
 
  - John Dinsmore, [GitHub] (https://github.com/djibba22).
  
   ## Questions
   For any questions, [mailto:alexisayyid@gmail.com] or [mailto:sarahlferguson07@gmail.com], 
-  
   or visit  [GitHub] (https://github.com/aisayyid) [GitHub] (https://github.com/sarahah)
  
