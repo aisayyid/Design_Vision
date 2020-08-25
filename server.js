@@ -75,14 +75,13 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
 
   };
 
-
   var uploadedFile = file;
- //await because quickstart takes time waits for return
+  //await because quickstart takes time waits for return
   //create variable lables final
   const labelsFinal = await quickstart(uploadedFile);
   //compare imagelabelobj to other images
 
-  const rows = await Images.find({imageName: uploadedFile.filename})
+  const rows = await Images.find({ imageName: uploadedFile.filename })
   // .lean()
   // .then((rows)=>{
   //   console.log("found something")
@@ -94,9 +93,6 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
     error.httpStatusCode = 400;
     return next(error);
   }
- 
- 
-
   //set up new image const equal to the model
   const newImage = new Images({
     imageName: uploadedFile.filename,
@@ -149,7 +145,7 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
             dbImage.confidence = confidence;
             // console.log("THIS IS DB IMAGE" , dbImage)
             arrayToSort.push(dbImage);
-          
+
           });
           //push the image to the array
 
@@ -165,7 +161,7 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
         }); //end of the find
     })
     .catch((err) => {
-      res.json({message: "duplicate"})
+      res.json({ message: "duplicate" })
       // console.log(err)
     }); //end of the db save
 }); //end of the post
@@ -206,7 +202,7 @@ app.get("/gallerydisplay/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 app.delete("/gallerydelete/:id", (req, res) => {
-  console.log("req.body" , req.body)
+  console.log("req.body", req.body)
   User.findByIdAndUpdate(
     req.params.id,
     { $pull: { gallery: req.body.image } },

@@ -24,7 +24,7 @@ console.log("these are the history", history)
 
   return (
     <div className = "col-sm-4">
-    <div className="card" style={{width: "18rem;"}}>
+    <div className="card" style={{width: "18rem;"}} id="gallerycards">
     <img src={`./uploads/${props.image}`} className="card-img-top" alt="..." id="galleryimg"/>
    
     <button type="button" onClick = {(e) => imageDelete(props.image)} className="btn btn-primary btn-sm" id="delete">Remove from Gallery</button>
