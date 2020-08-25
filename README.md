@@ -7,18 +7,38 @@
   - [Usage](#Usage)
   - [License](#License)
   - [Deployed](#Deployed)
-  - [SpecialThanks!](#SpecialThanks!)
+  - [SpecialThanksTo:](#SpecialThanksTo:)
   - [Questions](#Questions)
   ## Installation
-  
+  npm i
   ## Usage
+  - The user can create an account and login.
   
+  ![](/screenshots/register.png)
+  ![](/screenshots/login.png)
+
+  - Once they are logged in, they can upload the image they want to find reference art to by pressing the choose file button and then pressing upload.
+  
+  ![](/screenshots/dvsearch.png)
+
+  - A response will come back with images that are in the database that are similar to it with the tags listed out, and a confidence rating.  The images with most similarities will be listed first.
+
+   ![](/screenshots/dvsearchwithimages.png)
+
+   - The user now has the option to save any of the images from the search results to their personal assets page called "my assets", and the image uploaded will also now be stored in the database and available to view in the "all assets" page along with all the other images in the database, where the user can also look for images to save to their personal assets page.
+
+   ![](/screenshots/dvmyassets.png)
+   ![](/screenshots/dvallassets.png)
+
   ## License
   MIT
-  ## Contributing
+  ## Deployed
   
-  ## Tests
-  
+  ## SpecialThanksTo:
+ - Jorge Alvarez [GitHub] (https://github.com/jaab30)
+
+ - John Dinsmore [GitHub] (https://github.com/djibba22)
+ 
   ## Questions
   For any questions, [mailto:alexisayyid@gmail.com] or [mailto:sarahlferguson07@gmail.com], or visit  [GitHub] (https://github.com/aisayyid) [GitHub] (https://github.com/sarahah)
  
