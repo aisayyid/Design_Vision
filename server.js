@@ -226,7 +226,7 @@ if (process.env.NODE_ENV === "production") {
 // connect to Mongo DB
 // mongoose.Promise = global.Promise
 mongoose
-  .connect(config.MONGO_URI, {
+  .connect(config.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
