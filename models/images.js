@@ -12,6 +12,12 @@ var ImageSchema = new Schema({
     labels: {
         type: Array,
         required: true
+    },
+
+    location: {
+        type: String,
+        required: true,
+        unique: true
     }
 
 });
