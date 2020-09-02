@@ -44,6 +44,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 //setting up multer
 const storage = multer.diskStorage({
   //telling the destination of where to save the files
@@ -58,6 +59,8 @@ const storage = multer.diskStorage({
     );
   },
 });
+
+
 //sets a const for multer's storage engine
 const upload = multer({
   storage: multerS3({
