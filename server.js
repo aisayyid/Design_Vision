@@ -6,6 +6,9 @@ const config = require("./config");
 const routes = require("./routes");
 var bodyParser = require("body-parser");
 var multer = require("multer");
+const multerS3 = require ("multer-s3");
+const aws = require ("aws-sdk");
+const url = require ("url");
 const Images = require("./models/images");
 const fs = require("fs");
 const User = require("./models/user");
@@ -40,7 +43,12 @@ app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+//Setting up aws
+const s3 = new aws.S3({
+  accessKeyId: 'AKIAZWVSWLTGVPEEL7NX',
+  secretAccessKey: '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',
+  Bucket: 'saarahahnewbucket'
+ });
 //setting up multer
 const storage = multer.diskStorage({
   //telling the destination of where to save the files
