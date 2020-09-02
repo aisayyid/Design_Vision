@@ -5,11 +5,14 @@ require("dotenv").config();
 const config = require("./config");
 const routes = require("./routes");
 var bodyParser = require("body-parser");
+var aws = require('aws-sdk')
 var multer = require("multer");
+var multerS3 = require('multer-s3')
 const Images = require("./models/images");
 const fs = require("fs");
 const User = require("./models/user");
 const app = express();
+
 
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 async function quickstart(uploadedFile) {
@@ -56,8 +59,18 @@ const storage = multer.diskStorage({
   },
 });
 //sets a const for multer's storage engine
-const upload = multer({ storage: storage });
-
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'some-bucket',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString())
+    }
+  })
+})
 //we are pulling back the form data from search
 app.get("/search", (req, res) => {
   //res sendfile grabs from path
