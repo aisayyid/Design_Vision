@@ -61,8 +61,8 @@ const storage = multer.diskStorage({
 });
 
 const s3 = new aws.S3({
-  accessKeyId: AWS_ACCESS_KEY_ID,
-  secretAccessKey: AWS_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   Bucket: 'designvision'
 });
 //sets a const for multer's storage engine
