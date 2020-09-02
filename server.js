@@ -60,12 +60,16 @@ const storage = multer.diskStorage({
   },
 });
 
-
+const s3 = new aws.S3({
+  accessKeyId: 'AKIAZWVSWLTGVPEEL7NX',
+  secretAccessKey: '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',
+  Bucket: 'saarahahnewbucket'
+});
 //sets a const for multer's storage engine
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'some-bucket',
+    bucket: 'saarahahnewbucket',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname});
     },
