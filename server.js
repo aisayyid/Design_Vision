@@ -5,15 +5,18 @@ require("dotenv").config();
 const config = require("./config");
 const routes = require("./routes");
 var bodyParser = require("body-parser");
+var aws = require('aws-sdk')
 var multer = require("multer");
+var multerS3 = require('multer-s3')
 const Images = require("./models/images");
 const fs = require("fs");
 const User = require("./models/user");
 const app = express();
 
+
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 async function quickstart(uploadedFile) {
-  const uploadFilename = uploadedFile.filename;
+  const uploadFileurl = uploadedFile.location;
   // Imports the Google Cloud client library
   const vision = require("@google-cloud/vision");
 
@@ -25,9 +28,10 @@ async function quickstart(uploadedFile) {
   // Performs label detection on the image file
 
   const [result] = await client.labelDetection(
-    "./client/public/uploads/" + uploadFilename
+  uploadFileurl
   );
   const labels = result.labelAnnotations;
+  console.log("these are the labels", labels);
   const labelArray = [];
   labels.forEach((label) => labelArray.push(label.description));
   //goes to google returns array
@@ -41,23 +45,40 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 //setting up multer
-const storage = multer.diskStorage({
-  //telling the destination of where to save the files
-  destination: function (req, file, cb) {
-    cb(null, __dirname + "/client/public/uploads/");
-  },
-  //setting up file name
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.originalname
-    );
-  },
+// const storage = multer.diskStorage({
+//   //telling the destination of where to save the files
+//   destination: function (req, file, cb) {
+//     cb(null, __dirname + "/client/public/uploads/");
+//   },
+//   //setting up file name
+//   filename: function (req, file, cb) {
+//     cb(
+//       null,
+//       file.originalname
+//     );
+//   },
+// });
+
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  Bucket: process.env.AWS_BUCKET_NAME
 });
 //sets a const for multer's storage engine
-const upload = multer({ storage: storage });
-
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.AWS_BUCKET_NAME,
+    metadata: function (req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString())
+    }
+  })
+})
 //we are pulling back the form data from search
 app.get("/search", (req, res) => {
   //res sendfile grabs from path
@@ -67,6 +88,7 @@ app.get("/search", (req, res) => {
 //posting JSON data to a route upload file
 app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
   const file = req.file;
+  console.log("this is the file", file)
   //if there is not a file there is an error
   if (!file) {
     const error = new Error("please upload");
