@@ -16,7 +16,7 @@ const app = express();
 
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 async function quickstart(uploadedFile) {
-  const uploadFilename = uploadedFile.filename;
+  const uploadFileurl = uploadedFile.location;
   // Imports the Google Cloud client library
   const vision = require("@google-cloud/vision");
 
@@ -28,9 +28,10 @@ async function quickstart(uploadedFile) {
   // Performs label detection on the image file
 
   const [result] = await client.labelDetection(
-    "./client/public/uploads/" + uploadFilename
+  uploadFileurl
   );
   const labels = result.labelAnnotations;
+  console.log("these are the labels", labels);
   const labelArray = [];
   labels.forEach((label) => labelArray.push(label.description));
   //goes to google returns array
