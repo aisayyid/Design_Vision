@@ -46,19 +46,19 @@ app.use(bodyParser.json());
 
 
 //setting up multer
-const storage = multer.diskStorage({
-  //telling the destination of where to save the files
-  destination: function (req, file, cb) {
-    cb(null, __dirname + "/client/public/uploads/");
-  },
-  //setting up file name
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.originalname
-    );
-  },
-});
+// const storage = multer.diskStorage({
+//   //telling the destination of where to save the files
+//   destination: function (req, file, cb) {
+//     cb(null, __dirname + "/client/public/uploads/");
+//   },
+//   //setting up file name
+//   filename: function (req, file, cb) {
+//     cb(
+//       null,
+//       file.originalname
+//     );
+//   },
+// });
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -69,7 +69,7 @@ const s3 = new aws.S3({
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'designvision',
+    bucket: process.env.AWS_BUCKET_NAME,
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname});
     },
@@ -87,6 +87,7 @@ app.get("/search", (req, res) => {
 //posting JSON data to a route upload file
 app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
   const file = req.file;
+  console.log("this is the file", file)
   //if there is not a file there is an error
   if (!file) {
     const error = new Error("please upload");
