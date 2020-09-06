@@ -22,6 +22,7 @@ const Search = () => {
     const formData = new FormData();
     //appending to form data obj a property called my img
     formData.append('myImage', image)
+    console.log("this is the image on front", image)
     //form content type config
     const config = {
       headers: {

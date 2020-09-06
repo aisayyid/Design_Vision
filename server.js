@@ -30,6 +30,7 @@ async function quickstart(uploadedFile) {
   const [result] = await client.labelDetection(
   uploadFileurl
   );
+  console.log("This is goolge url", uploadFileurl)
   const labels = result.labelAnnotations;
   console.log("these are the labels", labels);
   const labelArray = [];
@@ -67,6 +68,7 @@ const s3 = new aws.S3({
   Bucket: process.env.AWS_BUCKET_NAME
 });
 //sets a const for multer's storage engine
+
 const upload = multer({
   storage: multerS3({
     s3: s3,
@@ -87,7 +89,7 @@ app.get("/search", (req, res) => {
 });
 
 //posting JSON data to a route upload file
-app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
+ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {   
   const file = req.file;
   console.log("this is the file", file)
   //if there is not a file there is an error
@@ -98,30 +100,21 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
 
   };
 
-  var uploadedFile = file;
+   var uploadedFile = await file;
   //await because quickstart takes time waits for return
   //create variable lables final
   const labelsFinal = await quickstart(uploadedFile);
   //compare imagelabelobj to other images
 
-  const rows = await Images.find({ imageName: uploadedFile.filename })
-  // .lean()
-  // .then((rows)=>{
-  //   console.log("found something")
-  // })
+  
 
-  if (rows.length > 0) {
-    // console.log("duplicate")
-    const error = new Error("duplicate");
-    error.httpStatusCode = 400;
-    return next(error);
-  }
   //set up new image const equal to the model
   const newImage = new Images({
-    imageName: uploadedFile.filename,
     //set labels to the labels final const
     labels: labelsFinal,
+    url: uploadedFile.location
   });
+  console.log("New Image", newImage);
   //save a new image as JSON
   newImage
     .save()
@@ -191,12 +184,13 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
 
 //add a get route to bring back all/one image
 app.get("/file", (req, res) => {
-  console.log("Server side route hit");
+ 
   //use the Images collection to do a db query to bring back all images for testing
   Images.find({})
     .then((data) => {
       //sends the data to the client in an express response.
-      res.json(data);
+      var imageData= res.json(data);
+      console.log("Data pass to front", imageData  )
     })
     .catch((err) => console.log(err));
 });
