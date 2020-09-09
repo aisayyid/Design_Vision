@@ -43,7 +43,22 @@ async function quickstart(uploadedFile) {
   return labelArray.sort();
 }
 
-
+async function colorDetect(uploadedFile) {
+  const uploadFileurl = uploadedFile.location;
+  // Imports the Google Cloud client library
+  const vision = require("@google-cloud/vision");
+  // Creates a client
+  const client = new vision.ImageAnnotatorClient({
+    keyFilename: "./apiAuthorization.json",
+  });  
+  const [result2] = await client.imageProperties(uploadFileurl);
+  const colors = result2.imagePropertiesAnnotation.dominantColors.colors;
+  const colorArray = [];
+  colors.forEach(color => colorArray.push(color));
+  //goes to google returns array
+  // console.log(colorArray)
+  return colorArray;
+}
 
 
 //////////GOOGLE VISIONS CODE//////////
@@ -97,6 +112,8 @@ app.get("/search", (req, res) => {
   //await because quickstart takes time waits for return
   //create variable lables final
   const labelsFinal = await quickstart(uploadedFile);
+  const colorsFinal = await colorDetect(uploadedFile);
+  
   //compare imagelabelobj to other images
 
   
@@ -105,6 +122,7 @@ app.get("/search", (req, res) => {
   const newImage = new Images({
     //set labels to the labels final const
     labels: labelsFinal,
+    colors: colorsFinal,
     url: uploadedFile.location
   });
   console.log("New Image", newImage);
@@ -151,6 +169,7 @@ app.get("/search", (req, res) => {
             //attach
             //  dbImage.test = "test";
             // console.log(dbImage.name, " has this confidence " , dbImage.confidence);
+            //add an if confidence values = same sort by color
             dbImage.confidence = confidence;
             // console.log("THIS IS DB IMAGE" , dbImage)
             arrayToSort.push(dbImage);
