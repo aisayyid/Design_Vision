@@ -27,17 +27,40 @@ async function quickstart(uploadedFile) {
 
   // Performs label detection on the image file
 
-  const [result] = await client.labelDetection(
-  uploadFileurl
-  );
+  const [result] = await client.labelDetection(uploadFileurl);
+  const [result2] = await client.imageProperties(uploadFileurl);
+
   console.log("This is goolge url", uploadFileurl)
   const labels = result.labelAnnotations;
+  const colors = result2.imagePropertiesAnnotation.dominantColors.colors;
   console.log("these are the labels", labels);
   const labelArray = [];
+  const colorArray = [];
   labels.forEach((label) => labelArray.push(label.description));
+  colors.forEach(color => colorArray.push(color));
   //goes to google returns array
+  console.log(colorArray)
   return labelArray.sort();
 }
+
+async function colorDetect(uploadedFile) {
+  const uploadFileurl = uploadedFile.location;
+  // Imports the Google Cloud client library
+  const vision = require("@google-cloud/vision");
+  // Creates a client
+  const client = new vision.ImageAnnotatorClient({
+    keyFilename: "./apiAuthorization.json",
+  });  
+  const [result2] = await client.imageProperties(uploadFileurl);
+  const colors = result2.imagePropertiesAnnotation.dominantColors.colors;
+  const colorArray = [];
+  colors.forEach(color => colorArray.push(color));
+  //goes to google returns array
+  // console.log(colorArray)
+  return colorArray;
+}
+
+
 //////////GOOGLE VISIONS CODE//////////
 // middleware to parse data
 app.use(express.urlencoded({ extended: true }));
@@ -45,22 +68,6 @@ app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
-//setting up multer
-// const storage = multer.diskStorage({
-//   //telling the destination of where to save the files
-//   destination: function (req, file, cb) {
-//     cb(null, __dirname + "/client/public/uploads/");
-//   },
-//   //setting up file name
-//   filename: function (req, file, cb) {
-//     cb(
-//       null,
-//       file.originalname
-//     );
-//   },
-// });
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -105,6 +112,8 @@ app.get("/search", (req, res) => {
   //await because quickstart takes time waits for return
   //create variable lables final
   const labelsFinal = await quickstart(uploadedFile);
+  const colorsFinal = await colorDetect(uploadedFile);
+  
   //compare imagelabelobj to other images
 
   
@@ -113,6 +122,7 @@ app.get("/search", (req, res) => {
   const newImage = new Images({
     //set labels to the labels final const
     labels: labelsFinal,
+    colors: colorsFinal,
     url: uploadedFile.location
   });
   console.log("New Image", newImage);
@@ -159,6 +169,7 @@ app.get("/search", (req, res) => {
             //attach
             //  dbImage.test = "test";
             // console.log(dbImage.name, " has this confidence " , dbImage.confidence);
+            //add an if confidence values = same sort by color
             dbImage.confidence = confidence;
             // console.log("THIS IS DB IMAGE" , dbImage)
             arrayToSort.push(dbImage);
