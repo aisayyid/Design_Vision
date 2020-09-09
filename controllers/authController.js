@@ -83,8 +83,8 @@ module.exports = {
                         firstname: user.firstname,
                         lastname: user.lastname,
                         _id: user._id,
-                        email
-                        // gallery: user.gallery
+                        email,
+                        gallery: user.gallery
                     })
                 })
             })
