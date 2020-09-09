@@ -27,17 +27,25 @@ async function quickstart(uploadedFile) {
 
   // Performs label detection on the image file
 
-  const [result] = await client.labelDetection(
-  uploadFileurl
-  );
+  const [result] = await client.labelDetection(uploadFileurl);
+  const [result2] = await client.imageProperties(uploadFileurl);
+
   console.log("This is goolge url", uploadFileurl)
   const labels = result.labelAnnotations;
+  const colors = result2.imagePropertiesAnnotation.dominantColors.colors;
   console.log("these are the labels", labels);
   const labelArray = [];
+  const colorArray = [];
   labels.forEach((label) => labelArray.push(label.description));
+  colors.forEach(color => colorArray.push(color));
   //goes to google returns array
+  console.log(colorArray)
   return labelArray.sort();
 }
+
+
+
+
 //////////GOOGLE VISIONS CODE//////////
 // middleware to parse data
 app.use(express.urlencoded({ extended: true }));
@@ -45,22 +53,6 @@ app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
-//setting up multer
-// const storage = multer.diskStorage({
-//   //telling the destination of where to save the files
-//   destination: function (req, file, cb) {
-//     cb(null, __dirname + "/client/public/uploads/");
-//   },
-//   //setting up file name
-//   filename: function (req, file, cb) {
-//     cb(
-//       null,
-//       file.originalname
-//     );
-//   },
-// });
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
