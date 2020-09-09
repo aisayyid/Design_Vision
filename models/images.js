@@ -7,10 +7,6 @@ var ImageSchema = new Schema({
         type: Array,
         required: true
     },
-    colors: {
-        type: Array,
-        required: true
-    },
     url: {
         type: String,
         required: true,
