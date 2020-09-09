@@ -9,14 +9,15 @@ function Card({ image }) {
 const user = useSelector(state => state.auth.currentUser);
   //function
   console.log("this is the user" , user)
+  console.log("This is the image object", image)
 
-  function imageSubmit(imageName){
+  function imageSubmit(url){
     //use axios to post to user dashboard
     axios.post("/gallery",
     { //set user to user id
      user: user._id,
     //set gallery to image name
-      gallery: imageName
+      gallery: url
     //push image into gallery
     }).then(data => {
       console.log(data)
@@ -29,7 +30,7 @@ const user = useSelector(state => state.auth.currentUser);
   return (
     <div className = "col-sm-4">
     <div className="card" style={{width: "18rem;"}} id="searchcards">
-    <img src={`./uploads/${image.imageName}`} className="card-img-top" alt="..."/>
+    <img src={`${image.url}`} className="card-img-top" alt="..."/>
     <div className="card-body">
       <p>
         {image.confidence}
@@ -38,7 +39,7 @@ const user = useSelector(state => state.auth.currentUser);
         <span className="badge badge-pill badge-info">{label}</span>
       ))}
     </div>
-    <button type="button" onClick = {(e) => imageSubmit(image.imageName)} className="btn btn-primary btn-sm">Save to Gallery</button>
+    <button type="button" onClick = {(e) => imageSubmit(image.url)} className="btn btn-primary btn-sm">Save to Gallery</button>
     </div>
   </div>
   );
