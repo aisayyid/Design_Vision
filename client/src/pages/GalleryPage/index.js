@@ -31,11 +31,10 @@ export const GalleryPage = () => {
         <>
             <div className="jumbotron jumbotron-fluid" id="galleryjumbo">
                 <h1 className="display-4">My Assets</h1>
-
             </div>
             <div className="container">
                 <div className="card-deck row">
-                    
+
                     {images.map(img => (
                         <GalleryCard
                             image={img}

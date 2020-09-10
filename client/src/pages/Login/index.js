@@ -28,12 +28,14 @@ const Login = (props) => {
     }
 
     return (
+        <>
+        <div className= "container" id="logo">
+        <img src={require("../../heroimages/Asset 3.png")}
+            id="logo"
+            alt="me" />
+    </div>
         <div className="form-container">
-            <div id="logo">
-                <img src={require("../../heroimages/Asset 3.png")}
-                    id="logo"
-                    alt="me" />
-            </div>
+           
             <Header as='h2' secondary="true" textAlign='center'>
                 Login to your account
                 </Header>
@@ -43,6 +45,7 @@ const Login = (props) => {
                 onSubmit={onFormSubmit}
             />
         </div>
+        </>
     )
 }
 
