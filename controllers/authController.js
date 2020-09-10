@@ -22,7 +22,8 @@ module.exports = {
                 firstname,
                 lastname,
                 email,
-                password
+                password,
+                gallery
             })
 
             // Check if user already exist
@@ -45,8 +46,7 @@ module.exports = {
                             token,
                             firstname,
                             lastname,
-                            email,
-                            gallery
+                            email
                         })
                     })
 
