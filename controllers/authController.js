@@ -46,7 +46,7 @@ module.exports = {
                             firstname,
                             lastname,
                             email,
-                            gallery
+                          
                         })
                     })
 
