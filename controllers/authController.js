@@ -45,7 +45,8 @@ module.exports = {
                             token,
                             firstname,
                             lastname,
-                            email
+                            email,
+                            gallery
                         })
                     })
 
