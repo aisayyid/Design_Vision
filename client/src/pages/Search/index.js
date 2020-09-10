@@ -40,6 +40,7 @@ const Search = () => {
         console.log(err)
       })
   }
+
   return (
     <>
       <ToastContainer
