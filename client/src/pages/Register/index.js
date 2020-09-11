@@ -1,4 +1,4 @@
-
+import "./register.css"
 import React from 'react';
 import { Header } from 'semantic-ui-react';
 import RegisterForm from "../../components/RegisterForm";
@@ -19,13 +19,14 @@ const Register = () => {
     }
 
     return (
-
+        <>
+        <div className= "container" id="registerlogo">
+        <img src={require("../../heroimages/Asset 3.png")}
+            id="logo"
+            alt="me" />
+    </div>
         <div className="form-container">
-               <div id="logo">
-            <img src={require("../../heroimages/Asset 3.png")} 
-        id="logo"
-          alt="me" />
-            </div>
+           
             <Header as='h2' secondary="true" textAlign='center'>
                 Register
             </Header>
@@ -35,6 +36,7 @@ const Register = () => {
                 onSubmit={onFormSubmit}
             />
         </div>
+        </>
     )
 }
 

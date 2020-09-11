@@ -6,7 +6,6 @@ import {useHistory} from "react-router-dom"
 
 
 function GalleryCard( props ) {
-// const history = useHistory()
   const user = useSelector(state => state.auth.currentUser);
   //function
   // console.log("this is the user" , user)

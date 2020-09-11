@@ -30,6 +30,7 @@ export const registerUser = (data) => async dispatch => {
     try {
         // send request to server side to register user
         const response = await API.register(data);
+        console.log("REGISTER RESPONSE ", response)
         // dispatch to reducer
         dispatch({
             type: REGISTER_SUCCESS,
@@ -57,9 +58,9 @@ export const loginUser = (data) => async dispatch => {
             type: LOGIN_SUCCESS,
             payload: response.data
         });
+        
         // redirect to page
         history.push("/gallerypage");
-
     } catch (err) {
         // dispatch get error Action
         dispatch(getErrors(err.response.data))

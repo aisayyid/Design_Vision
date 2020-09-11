@@ -7,7 +7,6 @@ module.exports = {
     async register(req, res) {
 
         try {
-
             const { email, password, firstname, lastname } = req.body;
             // Check user enters all fields
             if (!email || !password || !firstname || !lastname) return res.status(400).json({ message: "Please enter all fields" });
@@ -46,6 +45,7 @@ module.exports = {
                             firstname,
                             lastname,
                             email,
+                            _id: user.id
                           
                         })
                     })
@@ -97,6 +97,7 @@ module.exports = {
     // get user information
     async getUser(req, res) {
         try {
+           
             // find user by id
             const user = await User.findById(req.userId)
                 // return all info but password
@@ -108,5 +109,4 @@ module.exports = {
 
         }
     }
-
 };
