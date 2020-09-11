@@ -5,6 +5,7 @@ import LoginForm from "../../components/LoginForm";
 import { loginUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
 import "./login.css"
+import {loadUser} from "../../actions/authActions";
 
 
 const Login = (props) => {
@@ -25,6 +26,7 @@ const Login = (props) => {
 
     const onFormSubmit = (formVal) => {
         dispatch(loginUser(formVal));
+        
     }
 
     return (
