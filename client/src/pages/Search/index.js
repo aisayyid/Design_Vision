@@ -62,7 +62,7 @@ const Search = () => {
           <button type="submit button" value="Upload Image" name="submit" class="btn btn-primary">Upload Image</button>
         </form>
       </div>
-      <div>
+      
 
         <div className="container">
           <div className="card-deck row">
@@ -73,7 +73,7 @@ const Search = () => {
             ))}
           </div>
         </div>
-      </div>
+      
     </>
   )
 }
