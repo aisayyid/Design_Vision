@@ -3,6 +3,7 @@ import "./style.css";
 import imagesAPI from "../../utils/imagesAPI"
 import { useSelector } from "react-redux";
 import {useHistory} from "react-router-dom"
+import ModalImage from "react-modal-image";
 
 
 function GalleryCard( props ) {
@@ -25,7 +26,12 @@ console.log("these are the history", history)
   return (
     <div className = "col-sm-4">
     <div className="card" style={{width: "18rem;"}} id="gallerycards">
-    <img src={`${props.image}`} className="card-img-top" alt="..." id="galleryimg"/>
+    {/* <img src={`${props.image}`} className="card-img-top" alt="..." id="galleryimg"/> */}
+
+    <ModalImage className="galmodalImg"
+    small={`${props.image}`}
+    large={`${props.image}`}
+    />
    
     <button type="button" onClick = {(e) => imageDelete(props.image)} className="btn btn-primary btn-sm" id="delete">Remove from Gallery</button>
     </div>
