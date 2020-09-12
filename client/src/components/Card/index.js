@@ -3,6 +3,7 @@ import "./style.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from 'react-toastify';
+import ModalImage from "react-modal-image";
 
 //please work
 function Card({ image }) {
@@ -30,7 +31,15 @@ const user = useSelector(state => state.auth.currentUser);
   return (
     <div className = "col-sm-4">
     <div className="card" style={{width: "18rem;"}} id="searchcards">
-    <img src={`${image.url}`} className="card-img-top" alt="..."/>
+     
+    {/* <img src={`${image.url}`} className="card-img-top" alt="..."/> */}
+    
+
+<ModalImage className= "modalImg"
+  small={`${image.url}`}
+  large={`${image.url}`}
+/>
+
     <div className="card-body">
       <p>
         {image.confidence}

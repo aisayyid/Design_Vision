@@ -6,9 +6,15 @@
     height:375px;
   }
 
-  img{
+.img{
     /* object-fit: cover; */
     height: 65%;
+  }
+  .modalImg {
+    height:240px;
+    width: 400px;
+    object-fit: cover;
+   margin:auto;
   }
 
   
