@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Header, Message, Button, Icon } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Button, Icon } from "semantic-ui-react";
 import { useSelector } from "react-redux";
 import imagesAPI from "../../utils/imagesAPI";
 import Card from "../../components/Card/index";
@@ -35,13 +34,9 @@ export const AllAssets = () => {
     imagesAPI.getPictures()
       .then(res => {
         setImages(res.data)
-        console.log(res.data)
       }
       ).catch(err => console.log(err))
   }
-
-
-
 
   return (
     <div>
@@ -68,9 +63,6 @@ export const AllAssets = () => {
             />
           ))}
         </div>
-
-
-
       </div>
     </div>
   )

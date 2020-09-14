@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, Message, Segment, Label } from 'semantic-ui-react';
 import { Field, reduxForm } from "redux-form";
 import { clearErrors } from "../actions/authActions";
-import { withRouter } from 'react-router-dom';
 
 const LoginForm = (props) => {
 
@@ -26,7 +25,6 @@ const LoginForm = (props) => {
         <>
 
             <Form onSubmit={props.handleSubmit(props.onSubmit)} size='large'>
-
                 <Segment>
                     <Field
                         name="email"
@@ -39,12 +37,12 @@ const LoginForm = (props) => {
                         component={renderInput}
                         label="Password"
                     />
-                    <Button style={{backgroundColor:"#005DFF"}}secondary fluid size='large'>
+                    <Button style={{ backgroundColor: "#005DFF" }} secondary fluid size='large'>
                         {props.buttonText}
                     </Button>
                 </Segment>
             </Form>
-            <Message style={{backgroundColor:"#FFA200"}}>
+            <Message style={{ backgroundColor: "#FFA200" }}>
                 {props.renderMessage()}
             </Message>
         </>
@@ -71,10 +69,8 @@ const renderInput = ({ input, label }) => {
                 <i aria-hidden="true" className={selectIcon()}></i>
             </div>
         </div>
-
     )
 }
-
 
 export default reduxForm({
     form: "loginform"

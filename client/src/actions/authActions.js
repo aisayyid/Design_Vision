@@ -58,7 +58,7 @@ export const loginUser = (data) => async dispatch => {
             type: LOGIN_SUCCESS,
             payload: response.data
         });
-        
+
         // redirect to page
         history.push("/gallerypage");
     } catch (err) {

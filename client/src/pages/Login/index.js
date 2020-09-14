@@ -5,8 +5,6 @@ import LoginForm from "../../components/LoginForm";
 import { loginUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
 import "./login.css"
-import {loadUser} from "../../actions/authActions";
-
 
 const Login = (props) => {
     // access to the isAuthenticated property from the auth reducer state
