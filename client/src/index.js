@@ -6,7 +6,8 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import "./style.css";
 import { usePromiseTracker } from "react-promise-tracker";
-import Loader from 'react-loader-spinner';
+import PacmanLoader from "react-spinners/PacmanLoader";
+
 
 
 const LoadingIndicator = props => {
@@ -23,7 +24,7 @@ const LoadingIndicator = props => {
                 alignItems: "center"
             }}
         >
-            <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
+            <PacmanLoader type="PacmanLoader" color="#02005B" height="100" width="100" />
         </div>
 
     );

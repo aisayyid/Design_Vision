@@ -2,13 +2,10 @@
 import imagesAPI from "../../utils/imagesAPI"
 import React, { useEffect, useState } from "react";
 import Card from "../../components/Card/index";
-import { Header, Message } from "semantic-ui-react";
 import "./search.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
-import spinner from "../../components/spinner"
-import AwesomeComponent from "../../components/spinner";
 import { trackPromise } from 'react-promise-tracker';
 
 
@@ -70,7 +67,7 @@ const Search = () => {
 
           <input type="file" onChange={(e) => setImage(e.target.files[0])} name="myImage" accept="image/*" />
           <button type="submit button" value="Upload Image" name="submit" class="btn btn-primary">Upload Image</button>
-          <AwesomeComponent/>
+   
         </form>
       </div>
       
