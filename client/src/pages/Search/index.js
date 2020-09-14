@@ -39,9 +39,10 @@ const Search = () => {
       })
       .catch(err => {
         console.log(err)
-        toast.error("Wrong file format!")
+          toast.error("Must be jpg/jpeg/png/gif!")
       })
   }
+
   return (
     <>
       <ToastContainer
