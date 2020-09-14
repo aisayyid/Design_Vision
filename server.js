@@ -37,9 +37,6 @@ async function quickstart(uploadedFile) {
   return labelArray.sort();
 }
 
-
-
-
 //////////GOOGLE VISIONS CODE//////////
 // middleware to parse data
 app.use(express.urlencoded({ extended: true }));
@@ -60,15 +57,15 @@ const upload = multer({
     s3: s3,
     bucket: process.env.AWS_BUCKET_NAME,
     metadata: function (req, file, cb) {
-      cb(null, {fieldName: file.fieldname});
+      cb(null, { fieldName: file.fieldname });
     },
     acl: 'public-read',
     key: function (req, file, cb) {
-        cb(null, path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname))
+      cb(null, path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname))
     }
   }),
   fileFilter: function (req, file, cb) {
-      checkFileType(file, cb);
+    checkFileType(file, cb);
   }
 })
 
@@ -86,9 +83,9 @@ function checkFileType(file, cb) {
   // Check mime
   const mimetype = filetypes.test(file.mimetype);
   if (mimetype && extname) {
-      return cb(null, true);
+    return cb(null, true);
   } else {
-      cb('Error: Images Only!');
+    cb('Error: Images Only!');
   }
 }
 
@@ -100,7 +97,7 @@ app.get("/search", (req, res) => {
 });
 
 //posting JSON data to a route upload file
- app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {   
+app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
   const file = req.file;
   console.log("this is the file", file)
   //if there is not a file there is an error
@@ -112,15 +109,13 @@ app.get("/search", (req, res) => {
   };
 
   //newcommentdelete
-   var uploadedFile = file;
+  var uploadedFile = file;
   //await because quickstart takes time waits for return
   //create variable lables final
   const labelsFinal = await quickstart(uploadedFile);
 
-  
-  //compare imagelabelobj to other images
 
-  
+  //compare imagelabelobj to other images
 
   //set up new image const equal to the model
   const newImage = new Images({
@@ -199,13 +194,13 @@ app.get("/search", (req, res) => {
 
 //add a get route to bring back all/one image
 app.get("/file", (req, res) => {
- 
+
   //use the Images collection to do a db query to bring back all images for testing
   Images.find({})
     .then((data) => {
       //sends the data to the client in an express response.
-      var imageData= res.json(data);
-      console.log("Data pass to front", imageData  )
+      var imageData = res.json(data);
+      console.log("Data pass to front", imageData)
     })
     .catch((err) => console.log(err));
 });

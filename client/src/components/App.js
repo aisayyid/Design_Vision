@@ -16,7 +16,6 @@ import { ToastContainer } from 'react-toastify';
 
 export const App = () => {
 
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadUser());

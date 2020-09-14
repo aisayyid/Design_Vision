@@ -46,7 +46,7 @@ module.exports = {
                             lastname,
                             email,
                             _id: user.id
-                          
+
                         })
                     })
 
@@ -97,7 +97,7 @@ module.exports = {
     // get user information
     async getUser(req, res) {
         try {
-           
+
             // find user by id
             const user = await User.findById(req.userId)
                 // return all info but password
@@ -106,7 +106,6 @@ module.exports = {
             res.json(user)
         } catch (err) {
             throw err;
-
         }
     }
 };
