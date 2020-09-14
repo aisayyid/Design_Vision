@@ -37,7 +37,7 @@ async function quickstart(uploadedFile) {
   return labelArray.sort();
 }
 
-//////////GOOGLE VISIONS CODE//////////
+//////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 // middleware to parse data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
