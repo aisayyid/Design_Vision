@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import spinner from "../../components/spinner"
 import AwesomeComponent from "../../components/spinner";
+import { trackPromise } from 'react-promise-tracker';
+
 
 const Search = () => {
   
@@ -35,6 +37,7 @@ const Search = () => {
     }
 
     //a post call to /file
+    trackPromise(
     imagesAPI.createPicture(formData, config)
       .then(res => {
         console.log("this is the dataaaa", res.data)
@@ -43,7 +46,8 @@ const Search = () => {
       .catch(err => {
         console.log(err)
           toast.error("Must be jpg/jpeg/png/gif!")
-      })
+          
+      }))
   }
 
   return (
