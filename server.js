@@ -28,9 +28,7 @@ async function quickstart(uploadedFile) {
   // Performs label detection on the image file
 
   const [result] = await client.labelDetection(uploadFileurl);
-  console.log("This is goolge url", uploadFileurl)
   const labels = result.labelAnnotations;
-  console.log("these are the labels", labels);
   const labelArray = [];
   labels.forEach((label) => labelArray.push(label.description));
   //goes to google returns array
@@ -99,7 +97,6 @@ app.get("/search", (req, res) => {
 //posting JSON data to a route upload file
 app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
   const file = req.file;
-  console.log("this is the file", file)
   //if there is not a file there is an error
   if (!file) {
     const error = new Error("please upload");
@@ -123,7 +120,6 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
     labels: labelsFinal,
     url: uploadedFile.location
   });
-  console.log("New Image", newImage);
   //save a new image as JSON
   newImage
     .save()
@@ -156,39 +152,31 @@ app.post("/uploadFile", upload.single("myImage"), async (req, res, next) => {
               labelsFinal.forEach((label) => {
                 if (dbLabel == label) {
                   arrayOfMatches.push(dbLabel);
-                  // console.log("this is array of matches", arrayOfMatches);
                 }
               });
             });
-            // console.log("this is the array of matches", arrayOfMatches);
             //compute confidence
             confidence = arrayOfMatches.length;
-            // console.log("this is the confidence" , confidence)
             //attach
             //  dbImage.test = "test";
-            // console.log(dbImage.name, " has this confidence " , dbImage.confidence);
             //add an if confidence values = same sort by color
             dbImage.confidence = confidence;
-            // console.log("THIS IS DB IMAGE" , dbImage)
             arrayToSort.push(dbImage);
 
           });
           //push the image to the array
-
           //then sort that array
           let sortedData = arrayToSort.sort((a, b) => {
             return b.confidence - a.confidence;
           });
           // then send out the sorted data..
           // ).then((data) => {
-          //  console.log("array to sort" ,arrayToSort)
           res.json(sortedData);
-          // console.log(sortedData)
         }); //end of the find
     })
     .catch((err) => {
-      res.json({ message: "duplicate" })
-      // console.log(err)
+      // res.json({ message: "duplicate" })
+      console.log(err)
     }); //end of the db save
 }); //end of the post
 
@@ -199,14 +187,12 @@ app.get("/file", (req, res) => {
   Images.find({})
     .then((data) => {
       //sends the data to the client in an express response.
-      var imageData = res.json(data);
-      console.log("Data pass to front", imageData)
+      res.json(data);
     })
     .catch((err) => console.log(err));
 });
 
 app.post("/gallery", (req, res) => {
-  console.log("dashboard hit", req.body);
   User.findByIdAndUpdate(
     req.body.user,
     { $push: { gallery: req.body.gallery } },
@@ -224,12 +210,10 @@ app.get("/gallerydisplay/:id", (req, res) => {
     .then((data) => {
       //sends the data to the client in an express response.
       res.json(data);
-      console.log("GOT THE FUCKIN User data", data);
     })
     .catch((err) => console.log(err));
 });
 app.delete("/gallerydelete/:id", (req, res) => {
-  console.log("req.body", req.body)
   User.findByIdAndUpdate(
     req.params.id,
     { $pull: { gallery: req.body.image } },
@@ -238,7 +222,6 @@ app.delete("/gallerydelete/:id", (req, res) => {
     .then((data) => {
       //Sends the data to the client in an express response.
       res.json(data);
-      console.log("Delete route data", data);
     })
     .catch((err) => console.log(err));
 });
