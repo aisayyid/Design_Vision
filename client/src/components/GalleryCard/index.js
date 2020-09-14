@@ -31,7 +31,7 @@ function GalleryCard( props ) {
     large={`${props.image}`}
     />
    
-    <button type="button" onClick = {(e) => imageDelete(props.image)} className="btn btn-primary btn-sm" id="delete">Remove from Gallery</button>
+    <button type="button" onClick = {(e) => imageDelete(props.image)} className="btn btn-danger btn-sm" id="delete">Remove from Gallery</button>
     </div>
   </div>
   );
