@@ -5,6 +5,7 @@ import Card from "../../components/Card/index";
 import { Header, Message } from "semantic-ui-react";
 import "./search.css";
 import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 
 const Search = () => {
@@ -38,6 +39,7 @@ const Search = () => {
       })
       .catch(err => {
         console.log(err)
+        toast.error("Wrong file format!")
       })
   }
   return (

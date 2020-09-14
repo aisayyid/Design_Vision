@@ -13,7 +13,6 @@ const fs = require("fs");
 const User = require("./models/user");
 const app = express();
 
-
 //////////GOOGLE VISIONS CODE///////////////////////////////////////////////////////////////////////////
 async function quickstart(uploadedFile) {
   const uploadFileurl = uploadedFile.location;
@@ -66,8 +65,33 @@ const upload = multer({
     key: function (req, file, cb) {
         cb(null, path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname))
     }
-  })
+  }),
+  fileFilter: function (req, file, cb) {
+      checkFileType(file, cb);
+  }
 })
+
+/**
+* Check File Type
+* @param file
+* @param cb
+* @return {*}
+*/
+function checkFileType(file, cb) {
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+  if (mimetype && extname) {
+      return cb(null, true);
+  } else {
+      cb('Error: Images Only!');
+  }
+}
+
+
 //we are pulling back the form data from search
 app.get("/search", (req, res) => {
   //res sendfile grabs from path
