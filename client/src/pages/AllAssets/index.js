@@ -57,7 +57,7 @@ export const AllAssets = () => {
         pauseOnHover
       />
       <div className="jumbotron jumbotron-fluid" id="alljumbo">
-        <h1 className="display-4">All Assets</h1>
+        <h1 className="display-4" id="allassetsh1">All Assets</h1>
 
       </div>
       <div className="container">
